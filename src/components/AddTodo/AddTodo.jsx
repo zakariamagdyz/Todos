@@ -68,7 +68,7 @@ const AddTodo = ({ addTodo, allTodos }) => {
     <div className="add-todo">
       <form className="add-todo__form" onSubmit={handelSubmit}>
         <input
-          placeholder="New todo .."
+          placeholder="Create a new todo .."
           name="todo"
           required
           value={todo}
