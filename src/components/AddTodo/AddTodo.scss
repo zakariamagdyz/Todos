@@ -1,0 +1,42 @@
+.add-todo {
+  display: flex;
+  flex-direction: column;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    input,
+    button {
+      padding: 0.5rem;
+      box-shadow: 1rem 0 1rem rgba(0, 0, 0, 0.2);
+    }
+
+    input {
+      border: none;
+      background: #2c3e50;
+      color: #eee;
+      font-family: inherit;
+      font-size: 2rem;
+      border-bottom: 0.3rem solid lighten(#2c3e50, 10%);
+      outline: none;
+      &::-webkit-input-placeholder {
+        opacity: 0.4;
+      }
+    }
+    button {
+      margin: 1rem 0;
+      outline: none;
+      background: #ccc;
+      color: #2c3e50;
+      font-size: 2rem;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+
+      &:active {
+        transform: translateY(0.1rem);
+      }
+    }
+  }
+}
