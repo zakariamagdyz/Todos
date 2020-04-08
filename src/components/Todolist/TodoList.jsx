@@ -3,21 +3,21 @@ import "./Todolist.scss";
 import TodoItem from "../TodoItem/TodoItem";
 import TodoListData from "../TodoListData/TodolistData";
 import { connect } from "react-redux";
-import {
-  selectTargetTodos,
-  selectTodosType,
-} from "../../Redux/todos/todosSelector";
+import { selectTargetTodos } from "../../Redux/todos/todosSelector";
 import { createStructuredSelector } from "reselect";
 import { removeAllTodos } from "../../Redux/todos/todosActions";
 
 //
-const TodoList = ({ targetTodos, removeAll, type }) => {
+const TodoList = ({ targetTodos, removeAll }) => {
   return (
     <div className="todo-list">
       <div className="todo-list__info">
         <h3 className="todo-list__title">Today's todos</h3>
-        {targetTodos.length && type === "3" ? (
-          <button className="todo-list__remove-all" onClick={removeAll}>
+        {targetTodos.length ? (
+          <button
+            className="todo-list__remove-all"
+            onClick={() => removeAll(targetTodos)}
+          >
             Remove all
           </button>
         ) : null}
@@ -42,12 +42,11 @@ const TodoList = ({ targetTodos, removeAll, type }) => {
 
 const mapStateToProps = createStructuredSelector({
   targetTodos: selectTargetTodos,
-  type: selectTodosType,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeAll: () => dispatch(removeAllTodos()),
+    removeAll: (arr) => dispatch(removeAllTodos(arr)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

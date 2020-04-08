@@ -7,3 +7,16 @@ export const changeTodoState = (todos, payload) => {
     return todo;
   });
 };
+
+export const removeAllSection = (allTodos, targetTodos) => {
+  return allTodos.filter((todo) => {
+    let notExist = true;
+    targetTodos.forEach((toto) => {
+      if (toto.id === todo.id) {
+        notExist = false;
+      }
+    });
+
+    return notExist;
+  });
+};

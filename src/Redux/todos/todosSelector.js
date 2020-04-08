@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { selectFilterValue } from "../Filter/filterSelector";
 
 const selectTodos = (state) => state.todosData;
 
@@ -19,15 +20,29 @@ export const selectTodosType = createSelector(
   (todosData) => todosData.todosValue
 );
 
+const targetTodos = (filterValue, todos, completed) => {
+  if (completed !== undefined) {
+    return todos
+      .filter((todo) => todo.completed === completed)
+      .filter((todo) =>
+        todo.todoName.toLowerCase().includes(filterValue.toLowerCase())
+      );
+  } else {
+    return todos.filter((todo) =>
+      todo.todoName.toLowerCase().includes(filterValue.toLowerCase())
+    );
+  }
+};
+
 export const selectTargetTodos = createSelector(
-  [selectAll, selectTodosType],
-  (todosData, todosValue) => {
+  [selectAll, selectTodosType, selectFilterValue],
+  (todosData, todosValue, filterValue) => {
     if (todosValue === "1") {
-      return todosData.filter((todo) => todo.completed === true);
+      return targetTodos(filterValue, todosData, true);
     } else if (todosValue === "2") {
-      return todosData.filter((todo) => todo.completed === false);
+      return targetTodos(filterValue, todosData, false);
     } else {
-      return todosData;
+      return targetTodos(filterValue, todosData);
     }
   }
 );

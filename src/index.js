@@ -19,10 +19,10 @@ ReactDom.render(
 /*
 
 
-1.3-aauto ref
+
 
 3- remove all section only
-4- search todos
+
 5- add data base
 6- use redux saga
 8- responsive

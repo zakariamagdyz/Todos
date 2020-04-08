@@ -11,8 +11,9 @@ export const addNewTodo = ({ todo }) => ({
   },
 });
 
-export const removeAllTodos = () => ({
+export const removeAllTodos = (arr) => ({
   type: todosTypes.REMOVE_ALL_TODOS,
+  payload: arr,
 });
 
 export const removeTodo = (id) => ({
