@@ -21,7 +21,7 @@ ReactDom.render(
 
 
 
-3- remove all section only
+
 
 5- add data base
 6- use redux saga
