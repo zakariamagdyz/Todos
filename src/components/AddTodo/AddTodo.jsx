@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import Error from "../Error/Error";
 import { connect } from "react-redux";
 import { addNewTodo } from "../../Redux/todos/todosActions";
-import { selectAllTodos } from "../../Redux/todos/todosSelector";
+import { selectTargetTodos } from "../../Redux/todos/todosSelector";
 
 const AddTodo = ({ addTodo, allTodos }) => {
   const [todo, setTodo] = useState("");
@@ -88,6 +88,6 @@ const mapDispatchToprops = (dispatch) => ({
 });
 
 const mapStateToprops = (state) => ({
-  allTodos: selectAllTodos(state),
+  allTodos: selectTargetTodos(state),
 });
 export default connect(mapStateToprops, mapDispatchToprops)(AddTodo);

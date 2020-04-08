@@ -1,4 +1,5 @@
 import { todosTypes } from "./todosTypes";
+import { changeTodoState } from "./todosUtils";
 
 const INITAL_TODOS_DATA = {
   allTodos: [],
@@ -24,12 +25,7 @@ export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
     case todosTypes.CHANGE_TODO_STATE:
       return {
         ...state,
-        allTodos: state.allTodos.map((todo) => {
-          if (todo.id === action.payload) {
-            return { ...todo, completed: !todo.completed };
-          }
-          return todo;
-        }),
+        allTodos: changeTodoState(state.allTodos, action.payload),
       };
 
     case todosTypes.CHANGE_TODOS_TYPE:

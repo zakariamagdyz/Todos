@@ -11,16 +11,14 @@ import { removeTodo, changeTodoState } from "../../Redux/todos/todosActions";
 const TodoItem = (props) => {
   const { id, todoName, createAt, remove, completed, changeState } = props;
   return (
-    <div className={`todo-item ${completed && "todo-item--complete"}`}>
+    <div className={`todo-item ${completed && "disabled-active"}`}>
       <div className="todo-item__text">
         <p className="todo-item__name">{todoName}</p>
         <p className="todo-item__time">{moment(createAt).fromNow()}</p>
       </div>
 
       <button
-        className={`todo-item__done  ${
-          completed && "todo-item__done--disapled"
-        }`}
+        className={`todo-item__done  ${completed && "active"}`}
         onClick={() => {
           changeState(id);
         }}
@@ -28,10 +26,15 @@ const TodoItem = (props) => {
         <MdDone />
       </button>
 
-      <button className="todo-item__edit ">
-        <MdEdit />
-      </button>
-      <button className="todo-item__delete" onClick={() => remove(id)}>
+      {!completed && (
+        <button className={"todo-item__edit "}>
+          <MdEdit />
+        </button>
+      )}
+      <button
+        className={`todo-item__delete ${completed && "active"}`}
+        onClick={() => remove(id)}
+      >
         <MdDelete />
       </button>
     </div>

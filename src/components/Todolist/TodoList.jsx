@@ -1,29 +1,17 @@
 import React from "react";
 import "./Todolist.scss";
 import TodoItem from "../TodoItem/TodoItem";
+import TodoListData from "../TodoListData/TodolistData";
 import { connect } from "react-redux";
 import {
-  selectAllTodos,
-  selectCompleted,
-  selectUncompleted,
-  selectAll,
+  selectTargetTodos,
   selectTodosType,
 } from "../../Redux/todos/todosSelector";
 import { createStructuredSelector } from "reselect";
-import {
-  removeAllTodos,
-  changeTodosType,
-} from "../../Redux/todos/todosActions";
+import { removeAllTodos } from "../../Redux/todos/todosActions";
 
-const TodoList = ({
-  targetTodos,
-  removeAll,
-  comTodos,
-  uncomTodos,
-  all,
-  type,
-  changeTypes,
-}) => {
+//
+const TodoList = ({ targetTodos, removeAll, type }) => {
   return (
     <div className="todo-list">
       <div className="todo-list__info">
@@ -34,44 +22,32 @@ const TodoList = ({
           </button>
         ) : null}
       </div>
+
       {targetTodos.length ? (
-        targetTodos.map((curr) => <TodoItem key={curr.id} {...curr} />)
+        <div className="todo-list__todos">
+          {targetTodos.map((curr) => (
+            <TodoItem key={curr.id} {...curr} />
+          ))}{" "}
+        </div>
       ) : (
         <p className="todo-list__text">There is nothing to show </p>
       )}
 
-      {all.length ? (
-        <div className="todo-list__data">
-          <button
-            className="todo-list__data-1 "
-            onClick={() => changeTypes("3")}
-          >{`all (${all.length})`}</button>
-          <button
-            className="todo-list__data-2"
-            onClick={() => changeTypes("1")}
-          >{`completed (${comTodos})`}</button>
-          <button
-            className="todo-list__data-3"
-            onClick={() => changeTypes("2")}
-          >{`uncompleted (${uncomTodos})`}</button>
-        </div>
-      ) : null}
+      <TodoListData />
     </div>
   );
 };
 
+//
+
 const mapStateToProps = createStructuredSelector({
-  targetTodos: selectAllTodos,
-  comTodos: selectCompleted,
-  uncomTodos: selectUncompleted,
-  all: selectAll,
+  targetTodos: selectTargetTodos,
   type: selectTodosType,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     removeAll: () => dispatch(removeAllTodos()),
-    changeTypes: (type) => dispatch(changeTodosType(type)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import rootReducer from "./rootReducer";
+import { persistStore } from "redux-persist";
 
 export const configureStore = () => {
   const composeEnhancers =
@@ -10,6 +11,7 @@ export const configureStore = () => {
     rootReducer,
     composeEnhancers(applyMiddleware(...middlewares))
   );
+  const persistor = persistStore(store);
 
-  return store;
+  return { store, persistor };
 };

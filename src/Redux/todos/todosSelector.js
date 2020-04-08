@@ -19,7 +19,7 @@ export const selectTodosType = createSelector(
   (todosData) => todosData.todosValue
 );
 
-export const selectAllTodos = createSelector(
+export const selectTargetTodos = createSelector(
   [selectAll, selectTodosType],
   (todosData, todosValue) => {
     if (todosValue === "1") {

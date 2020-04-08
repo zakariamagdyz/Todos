@@ -7,6 +7,10 @@
   box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
   position: relative;
 
+  &__text {
+    position: relative;
+  }
+
   &__name {
     text-transform: capitalize;
     font-size: 1.9rem;
@@ -29,7 +33,7 @@
     border: 0;
     cursor: pointer;
     color: lighten(#2c3e50, 20%);
-    transition: color 0.3s ease-in-out, transform 0.2s ease;
+    transition: color 0.2s ease-in-out, transform 0.2s ease;
     &:hover {
       transform: translateY(-0.1rem);
     }
@@ -39,7 +43,8 @@
   }
 
   &__delete {
-    &:hover {
+    &:hover,
+    &.active {
       color: #e74c3c;
     }
   }
@@ -48,7 +53,8 @@
     margin-left: auto;
     margin-right: 1rem;
     font-size: 3.2rem;
-    &:hover {
+    &:hover,
+    &.active {
       color: #27ae60;
     }
   }
@@ -60,16 +66,8 @@
   }
 }
 
-.todo-item--complete {
+.disabled-active {
   opacity: 0.5;
-  .todo-item__done--disapled {
-    opacity: 1;
-    color: #27ae60;
-    opacity: 1;
-  }
-  .todo-item__text {
-    position: relative;
-  }
   .todo-item__text::after {
     content: "";
     background: #e74c3c;
@@ -80,5 +78,16 @@
     left: -5px;
     box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 3rem;
+    animation: width-change 0.3s ease-in-out;
+
+    @keyframes width-change {
+      0% {
+        width: 0%;
+      }
+
+      100% {
+        width: 115%;
+      }
+    }
   }
 }
