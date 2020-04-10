@@ -1,5 +1,9 @@
-import React from "react";
-import "./TodoSearch.scss";
+import React, { Fragment } from "react";
+import {
+  TodoSearchForm,
+  TodoSearchSelect,
+  TodoSearchInput,
+} from "./todoSearchStyle";
 import { connect } from "react-redux";
 import { selectTodosType } from "../../Redux/todos/todosSelector";
 import { changeTodosType } from "../../Redux/todos/todosActions";
@@ -18,23 +22,18 @@ const TodoSearch = ({ selectedValue, changeTodos, filter, setFilterValue }) => {
 
   return (
     <div className="todo-search">
-      <form className="todo-search__form">
-        <input
-          placeholder="Search for todos"
-          className="todo-search__search-input"
+      <TodoSearchForm>
+        <TodoSearchInput
           value={filter}
           onChange={handelInputChange}
-        />
-        <select
-          className="todo-search__select"
-          onChange={handelSelectChange}
-          value={selectedValue}
-        >
+        ></TodoSearchInput>
+
+        <TodoSearchSelect onChange={handelSelectChange} value={selectedValue}>
           <option value="1"> Completed</option>
           <option value="2">Uncompleted</option>
           <option value="3">All</option>
-        </select>
-      </form>
+        </TodoSearchSelect>
+      </TodoSearchForm>
     </div>
   );
 };

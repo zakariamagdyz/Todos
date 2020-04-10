@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import "./TodolistData.scss";
+import { ListDataStyled, ListDataButton } from "./todolistDataStyle";
 import { connect } from "react-redux";
 import {
   selectAll,
@@ -20,28 +20,32 @@ const TodolistData = ({
   changeTypes,
   todosType,
 }) => {
-  const checkActive = (num) => num === todosType && "active";
+  const checkActive = (num) => (num === todosType ? true : false);
 
   //
   return (
-    <Fragment>
+    <div className="todo-list-data">
       {allTodos.length ? (
-        <div className="list-data">
-          <button
-            className={`list-data__btn  list-data__btn--1 ${checkActive("3")}`}
+        <ListDataStyled>
+          <ListDataButton
+            all
+            activeAll={checkActive("3")}
             onClick={() => changeTypes("3")}
-          >{`all (${allTodos.length})`}</button>
-          <button
-            className={`list-data__btn  list-data__btn--2 ${checkActive("1")}`}
+          >{`all (${allTodos.length})`}</ListDataButton>
+          <ListDataButton
+            completed
+            align
+            activeCompleted={checkActive("1")}
             onClick={() => changeTypes("1")}
-          >{`completed (${completedTodos})`}</button>
-          <button
-            className={`list-data__btn  list-data__btn--3 ${checkActive("2")}`}
+          >{`completed (${completedTodos})`}</ListDataButton>
+          <ListDataButton
+            unCompleted
+            activeUnCompleted={checkActive("2")}
             onClick={() => changeTypes("2")}
-          >{`uncompleted (${uncompletedTodos})`}</button>
-        </div>
+          >{`uncompleted (${uncompletedTodos})`}</ListDataButton>
+        </ListDataStyled>
       ) : null}
-    </Fragment>
+    </div>
   );
 };
 

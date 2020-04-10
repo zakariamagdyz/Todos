@@ -1,7 +1,11 @@
 import React, { useRef, useEffect } from "react";
-import "./AddTodo.scss";
+import {
+  AddTodoButton,
+  AddTodoForm,
+  AddTodoInput,
+  AddTodoStyled,
+} from "./addTodoStyle";
 
-import Button from "../Button/Button";
 import Error from "../Error/Error";
 import { connect } from "react-redux";
 import { addNewTodo } from "../../Redux/todos/todosActions";
@@ -67,6 +71,7 @@ const AddTodo = ({
       if (curr.todoName.toLowerCase() === inputValue.toLowerCase())
         isError = true;
     });
+
     //SHOW ERROR
     if (isError) {
       setErrorMsg(errorMsgs.sameName);
@@ -81,20 +86,22 @@ const AddTodo = ({
 
   return (
     <div className="add-todo">
-      <form className="add-todo__form" onSubmit={handelSubmit}>
-        <input
-          placeholder="Create a new todo .."
-          name="todo"
-          required
-          value={inputValue}
-          onChange={hanedelChange}
-          autoComplete="off"
-          ref={inputRef}
-        />
-        <Button />
-      </form>
+      <AddTodoStyled>
+        <AddTodoForm onSubmit={handelSubmit}>
+          <AddTodoInput
+            placeholder="Create a new todo .."
+            name="todo"
+            required
+            value={inputValue}
+            onChange={hanedelChange}
+            autoComplete="off"
+            ref={inputRef}
+          />
+          <AddTodoButton>Add todo</AddTodoButton>
+        </AddTodoForm>
 
-      {errorValue && <Error msg={errorValue} />}
+        {errorValue && <Error msg={errorValue} />}
+      </AddTodoStyled>
     </div>
   );
 };

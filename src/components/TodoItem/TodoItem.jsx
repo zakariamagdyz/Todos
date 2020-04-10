@@ -1,5 +1,5 @@
 import React from "react";
-import "./TodoItem.scss";
+import { TodoItemButton, TodoItemStyled, TodoItemTexts } from "./todoItemStyle";
 import moment from "moment";
 import { MdDelete, MdEdit, MdDone } from "react-icons/md";
 
@@ -11,33 +11,35 @@ import { removeTodo, changeTodoState } from "../../Redux/todos/todosActions";
 const TodoItem = (props) => {
   const { id, todoName, createAt, remove, completed, changeState } = props;
   return (
-    <div className={`todo-item ${completed && "disabled-active"}`}>
-      <div className="todo-item__text">
-        <p className="todo-item__name">{todoName}</p>
-        <p className="todo-item__time">{moment(createAt).fromNow()}</p>
-      </div>
+    <TodoItemStyled active={completed && true}>
+      <TodoItemTexts className="hola">
+        <p>{todoName}</p>
+        <p>{moment(createAt).fromNow()}</p>
+      </TodoItemTexts>
 
-      <button
-        className={`todo-item__done  ${completed && "active"}`}
+      <TodoItemButton
+        done
+        active={completed && true}
         onClick={() => {
           changeState(id);
         }}
       >
         <MdDone />
-      </button>
+      </TodoItemButton>
 
       {!completed && (
-        <button className={"todo-item__edit "}>
+        <TodoItemButton edit>
           <MdEdit />
-        </button>
+        </TodoItemButton>
       )}
-      <button
-        className={`todo-item__delete ${completed && "active"}`}
+      <TodoItemButton
+        delete
+        active={completed && true}
         onClick={() => remove(id)}
       >
         <MdDelete />
-      </button>
-    </div>
+      </TodoItemButton>
+    </TodoItemStyled>
   );
 };
 

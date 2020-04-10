@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Styles/App.scss";
+import { GlobalStyle } from "./appStyle";
 import Header from "../Header/Header";
 import Footer from "./../Footer/Footer";
 import HomePage from "../../pages/HomePage/HomePage";
@@ -9,12 +9,13 @@ const App = () => {
   return (
     <div className="app">
       <BrowserRouter>
+        <GlobalStyle />
         <Header />
         <Switch>
           <Route path="/" exact component={HomePage}></Route>
         </Switch>
+        <Footer />
       </BrowserRouter>
-      <Footer />
     </div>
   );
 };

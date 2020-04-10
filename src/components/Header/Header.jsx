@@ -1,13 +1,20 @@
 import React from "react";
-import "./header.scss";
+import {
+  HeaderStyled,
+  Container,
+  HeaderTitle,
+  HeaderSubtitle,
+} from "./headerStyle";
 
 const Header = () => {
   return (
     <div className="header">
-      <div className="container">
-        <h1 className="header__title">Todo App</h1>
-        <p className="header__subtitle">A new step to organize your life</p>
-      </div>
+      <HeaderStyled>
+        <Container>
+          <HeaderTitle>Todo App</HeaderTitle>
+          <HeaderSubtitle>A new step to organize your life</HeaderSubtitle>
+        </Container>
+      </HeaderStyled>
     </div>
   );
 };

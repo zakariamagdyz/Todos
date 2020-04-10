@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import "./Error.scss";
+import { ErrorMsg } from "./errorStyle";
+
 const Error = ({ msg }) => {
   return (
     <Fragment>
-      <p className="error-msg">{msg}</p>
+      <ErrorMsg>{msg}</ErrorMsg>
     </Fragment>
   );
 };

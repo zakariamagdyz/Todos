@@ -1,13 +1,12 @@
 import React from "react";
-
-import "./Footer.scss";
+import { FooterData, FooterStyled } from "./footerStyle";
 
 const Footer = () => {
   return (
     <div className="footer">
-      <p className="footer__data">
-        Zakaria Magdy &copy; 2020 All rights reserved
-      </p>
+      <FooterStyled>
+        <FooterData>Zakaria Magdy &copy; 2020 All rights reserved</FooterData>
+      </FooterStyled>
     </div>
   );
 };

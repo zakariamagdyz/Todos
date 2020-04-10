@@ -1,5 +1,12 @@
 import React from "react";
-import "./Todolist.scss";
+
+import {
+  TodolistText,
+  TodoListInfo,
+  TodoListRemove,
+  TodoListStyled,
+  TodoListTitle,
+} from "./todoListStyle";
 import TodoItem from "../TodoItem/TodoItem";
 import TodoListData from "../TodoListData/TodolistData";
 import { connect } from "react-redux";
@@ -10,30 +17,29 @@ import { removeAllTodos } from "../../Redux/todos/todosActions";
 //
 const TodoList = ({ targetTodos, removeAll }) => {
   return (
-    <div className="todo-list">
-      <div className="todo-list__info">
-        <h3 className="todo-list__title">Today's todos</h3>
+    <div className="todo-List">
+      <TodoListStyled>
+        <TodoListInfo>
+          <TodoListTitle>Today's todos</TodoListTitle>
+          {targetTodos.length ? (
+            <TodoListRemove onClick={() => removeAll(targetTodos)}>
+              Remove all
+            </TodoListRemove>
+          ) : null}
+        </TodoListInfo>
+
         {targetTodos.length ? (
-          <button
-            className="todo-list__remove-all"
-            onClick={() => removeAll(targetTodos)}
-          >
-            Remove all
-          </button>
-        ) : null}
-      </div>
+          <div className="todo-list__todos">
+            {targetTodos.map((curr) => (
+              <TodoItem key={curr.id} {...curr} />
+            ))}{" "}
+          </div>
+        ) : (
+          <TodolistText>There is nothing to show </TodolistText>
+        )}
 
-      {targetTodos.length ? (
-        <div className="todo-list__todos">
-          {targetTodos.map((curr) => (
-            <TodoItem key={curr.id} {...curr} />
-          ))}{" "}
-        </div>
-      ) : (
-        <p className="todo-list__text">There is nothing to show </p>
-      )}
-
-      <TodoListData />
+        <TodoListData />
+      </TodoListStyled>
     </div>
   );
 };
