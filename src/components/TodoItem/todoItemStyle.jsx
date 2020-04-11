@@ -28,6 +28,7 @@ const activeDisabled = css`
 
 const TodoItemStyled = styled.div`
   color: #eee;
+  background: ${(props) => props.edit && "#305477"};
   display: flex;
   margin: 1rem 0;
   border: 0.1rem solid #507192;
@@ -67,14 +68,14 @@ const doneButton = css`
   margin-right: 1rem;
   font-size: 3.2rem;
   color: ${(props) => props.active && "#27ae60"};
-  &:hover {
+  :hover {
     color: #27ae60;
   }
 `;
 
 const editButton = css`
   margin-right: 1rem;
-  &:hover {
+  :hover {
     color: #3498db;
   }
 `;

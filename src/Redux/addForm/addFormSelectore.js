@@ -11,3 +11,8 @@ export const selectErrorValue = createSelector(
   [selectInputForm],
   (addform) => addform.error
 );
+
+export const selectEditValue = createSelector(
+  [selectInputForm],
+  (addform) => addform.editInput
+);

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { ListDataStyled, ListDataButton } from "./todolistDataStyle";
 import { connect } from "react-redux";
 import {
@@ -29,18 +29,18 @@ const TodolistData = ({
         <ListDataStyled>
           <ListDataButton
             all
-            activeAll={checkActive("3")}
+            active={checkActive("3")}
             onClick={() => changeTypes("3")}
           >{`all (${allTodos.length})`}</ListDataButton>
           <ListDataButton
             completed
             align
-            activeCompleted={checkActive("1")}
+            active={checkActive("1")}
             onClick={() => changeTypes("1")}
           >{`completed (${completedTodos})`}</ListDataButton>
           <ListDataButton
             unCompleted
-            activeUnCompleted={checkActive("2")}
+            active={checkActive("2")}
             onClick={() => changeTypes("2")}
           >{`uncompleted (${uncompletedTodos})`}</ListDataButton>
         </ListDataStyled>

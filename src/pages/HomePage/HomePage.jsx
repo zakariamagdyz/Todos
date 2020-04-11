@@ -9,7 +9,7 @@ const HomePage = () => {
       <HomePageStyled>
         <HomePageContainer>
           <TodoSearch />
-          <TodoList />
+          <TodoList todoData title="Today's todos" />
           <AddTodo />
         </HomePageContainer>
       </HomePageStyled>

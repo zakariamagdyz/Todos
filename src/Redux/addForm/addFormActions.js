@@ -9,3 +9,8 @@ export const setError = (msg) => ({
   type: addFormTypes.SET_ERROR,
   payload: msg,
 });
+
+export const setTodoEdit = (value) => ({
+  type: addFormTypes.SET_TODO_EDIT,
+  payload: value,
+});

@@ -3,6 +3,7 @@ import { GlobalStyle } from "./appStyle";
 import Header from "../Header/Header";
 import Footer from "./../Footer/Footer";
 import HomePage from "../../pages/HomePage/HomePage";
+import EditPage from "../../pages/EditPage/EditPage";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Header />
         <Switch>
           <Route path="/" exact component={HomePage}></Route>
+          <Route path="/edit/:todoId" exact component={EditPage}></Route>
         </Switch>
         <Footer />
       </BrowserRouter>

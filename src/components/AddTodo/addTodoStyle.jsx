@@ -33,7 +33,8 @@ const AddTodoInput = styled.input`
 const AddTodoButton = styled.button`
   margin: 1rem 0;
   outline: none;
-  background: #ccc;
+  background: ${(props) => (props.edit ? "#77B39E" : "#ccc")};
+  margin-bottom: ${(props) => props.edit && "3rem"};
   color: #2c3e50;
   font-size: 2rem;
   border: 0;

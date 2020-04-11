@@ -1,5 +1,5 @@
 import { todosTypes } from "./todosTypes";
-import { changeTodoState } from "./todosUtils";
+import { changeTodoState, changeTodoName } from "./todosUtils";
 import { removeAllSection } from "./todosUtils";
 
 const INITAL_TODOS_DATA = {
@@ -34,6 +34,13 @@ export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
 
     case todosTypes.CHANGE_TODOS_TYPE:
       return { ...state, todosValue: action.payload };
+
+    case todosTypes.EDIT_TODO:
+      return {
+        ...state,
+        allTodos: changeTodoName(state.allTodos, action.payload),
+      };
+
     default:
       return state;
   }

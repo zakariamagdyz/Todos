@@ -1,15 +1,25 @@
 import styled, { css } from "styled-components/macro";
 
-const hover = css`
-  color: ${(props) => props.all && "#3498db"};
-  color: ${(props) => props.completed && "#27ae60"};
-  color: ${(props) => props.unCompleted && "#e74c3c"};
+const allButton = css`
+  color: ${(props) => props.active && "#3498db"};
+  &:hover {
+    color: #3498db;
+  }
 `;
 
-const active = css`
-  color: ${(props) => props.activeAll && "#3498db"};
-  color: ${(props) => props.activeCompleted && "#27ae60"};
-  color: ${(props) => props.activeUnCompleted && "#e74c3c"};
+const completedButton = css`
+  color: ${(props) => props.active && "#27ae60"};
+  &:hover {
+    color: #27ae60;
+  }
+`;
+
+const unCompleteButton = css`
+  color: ${(props) => props.active && "#e74c3c"};
+
+  &:hover {
+    color: #e74c3c;
+  }
 `;
 
 const align = css`
@@ -32,13 +42,11 @@ export const ListDataButton = styled.button`
   font-style: italic;
   cursor: pointer;
   padding-bottom: 0.2rem;
-  transition: color 0.1s linear;
   color: #ccc;
-  ${active}
-
-  &:hover {
-    ${hover}
-  }
+  transition: color 0.1s linear;
+  ${(props) => props.all && allButton}
+  ${(props) => props.completed && completedButton}
+  ${(props) => props.unCompleted && unCompleteButton}
 
   ${(props) => props.align && align}
 `;

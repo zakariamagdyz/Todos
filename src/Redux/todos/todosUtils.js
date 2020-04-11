@@ -8,6 +8,19 @@ export const changeTodoState = (todos, payload) => {
   });
 };
 
+export const changeTodoName = (todos, payload) => {
+  return todos.map((todo) => {
+    if (todo.id === payload.id) {
+      return {
+        ...todo,
+        todoName: payload.name,
+        createAt: new Date().getTime(),
+      };
+    }
+    return todo;
+  });
+};
+
 export const removeAllSection = (allTodos, targetTodos) => {
   return allTodos.filter((todo) => {
     let notExist = true;

@@ -46,3 +46,8 @@ export const selectTargetTodos = createSelector(
     }
   }
 );
+
+export const selectEditedTodo = (id) =>
+  createSelector([selectAll], (todos) => {
+    return todos.find((todo) => todo.id === id);
+  });

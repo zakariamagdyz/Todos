@@ -5,15 +5,26 @@ import { MdDelete, MdEdit, MdDone } from "react-icons/md";
 
 import { connect } from "react-redux";
 import { removeTodo, changeTodoState } from "../../Redux/todos/todosActions";
+import { withRouter } from "react-router-dom";
 
 //
 
 const TodoItem = (props) => {
-  const { id, todoName, createAt, remove, completed, changeState } = props;
+  const {
+    id,
+    todoName,
+    createAt,
+    completed,
+    remove,
+    changeState,
+    history,
+    editMode,
+    editValue,
+  } = props;
   return (
-    <TodoItemStyled active={completed && true}>
-      <TodoItemTexts className="hola">
-        <p>{todoName}</p>
+    <TodoItemStyled active={completed && true} edit={editMode ? true : false}>
+      <TodoItemTexts>
+        <p>{editMode ? editValue : todoName}</p>
         <p>{moment(createAt).fromNow()}</p>
       </TodoItemTexts>
 
@@ -22,20 +33,25 @@ const TodoItem = (props) => {
         active={completed && true}
         onClick={() => {
           changeState(id);
+          editMode && history.push("/");
         }}
       >
         <MdDone />
       </TodoItemButton>
 
-      {!completed && (
-        <TodoItemButton edit>
+      {!editMode && !completed ? (
+        <TodoItemButton edit onClick={() => history.push(`/edit/${id}`)}>
           <MdEdit />
         </TodoItemButton>
-      )}
+      ) : null}
+
       <TodoItemButton
         delete
         active={completed && true}
-        onClick={() => remove(id)}
+        onClick={() => {
+          remove(id);
+          editMode && history.push("/");
+        }}
       >
         <MdDelete />
       </TodoItemButton>
@@ -48,4 +64,4 @@ const mapDispatchToProps = (dispatch) => ({
   changeState: (id) => dispatch(changeTodoState(id)),
 });
 
-export default connect(null, mapDispatchToProps)(TodoItem);
+export default withRouter(connect(null, mapDispatchToProps)(TodoItem));

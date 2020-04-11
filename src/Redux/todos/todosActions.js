@@ -30,3 +30,8 @@ export const changeTodosType = (typeNum) => ({
   type: todosTypes.CHANGE_TODOS_TYPE,
   payload: typeNum,
 });
+
+export const changeTodoName = ({ id, name }) => ({
+  type: todosTypes.EDIT_TODO,
+  payload: { id, name },
+});

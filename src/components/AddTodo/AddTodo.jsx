@@ -17,6 +17,7 @@ import {
 } from "../../Redux/addForm/addFormSelectore";
 
 import { createStructuredSelector } from "reselect";
+import { withRouter } from "react-router-dom";
 
 //
 
@@ -27,6 +28,12 @@ const AddTodo = ({
   setInput,
   inputValue,
   errorValue,
+  history,
+  editMode,
+  editInputValue,
+  editHandelChange,
+  editTodo,
+  todoId,
 }) => {
   // ErrorMsgs
   const errorMsgs = {
@@ -60,16 +67,16 @@ const AddTodo = ({
   // HANDEL SUBMIT
   const handelSubmit = (e) => {
     e.preventDefault();
+    const value = editMode ? editInputValue : inputValue;
     //SHOW ERROR
-    if (inputValue.length > 50 || inputValue.length < 4) {
-      setErrorMsg(inputValue.length < 4 ? errorMsgs.less4 : errorMsgs.above50);
+    if (value.length > 50 || value.length < 4) {
+      setErrorMsg(value.length < 4 ? errorMsgs.less4 : errorMsgs.above50);
       hideError();
       return;
     }
     let isError = false;
     allTodos.forEach((curr) => {
-      if (curr.todoName.toLowerCase() === inputValue.toLowerCase())
-        isError = true;
+      if (curr.todoName.toLowerCase() === value.toLowerCase()) isError = true;
     });
 
     //SHOW ERROR
@@ -79,7 +86,12 @@ const AddTodo = ({
       return;
     }
     //ADD TODO
-    addTodo({ todo: inputValue.trim().toLowerCase() });
+    if (editMode) {
+      editTodo({ id: todoId, name: value.trim().toLowerCase() });
+      history.push("/");
+    } else {
+      addTodo({ todo: value.trim().toLowerCase() });
+    }
     //DEFAULT STATE
     defaultState();
   };
@@ -89,15 +101,17 @@ const AddTodo = ({
       <AddTodoStyled>
         <AddTodoForm onSubmit={handelSubmit}>
           <AddTodoInput
-            placeholder="Create a new todo .."
+            placeholder={!editMode ? "Create a new todo .." : ""}
             name="todo"
-            required
-            value={inputValue}
-            onChange={hanedelChange}
+            required={!editMode && true}
+            value={!editMode ? inputValue : editInputValue}
+            onChange={!editMode ? hanedelChange : editHandelChange}
             autoComplete="off"
             ref={inputRef}
           />
-          <AddTodoButton>Add todo</AddTodoButton>
+          <AddTodoButton edit={editMode ? true : false}>
+            {!editMode ? "Add todo" : "Save edit"}
+          </AddTodoButton>
         </AddTodoForm>
 
         {errorValue && <Error msg={errorValue} />}
@@ -117,4 +131,6 @@ const mapStateToprops = createStructuredSelector({
   inputValue: selectInputValue,
   errorValue: selectErrorValue,
 });
-export default connect(mapStateToprops, mapDispatchToprops)(AddTodo);
+export default withRouter(
+  connect(mapStateToprops, mapDispatchToprops)(AddTodo)
+);
