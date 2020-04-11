@@ -20,12 +20,17 @@ const EditPage = ({
   setErrorValue,
 }) => {
   useEffect(() => {
-    setName(todo.todoName);
+    setName(todo && todo.todoName);
   }, []);
 
   const handelEditChange = (e) => {
     setName(e.target.value);
   };
+
+  if (!todo) {
+    history.push("/");
+    return;
+  }
 
   return (
     <div className="edit-page">
