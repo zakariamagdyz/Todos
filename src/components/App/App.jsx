@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Footer from "./../Footer/Footer";
 import HomePage from "../../pages/HomePage/HomePage";
 import EditPage from "../../pages/EditPage/EditPage";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 const Er = () => <div>error</div>;
 
@@ -17,7 +17,7 @@ const App = () => {
         <Switch>
           <Route path="/" exact component={HomePage}></Route>
           <Route path="/edit/:todoId" exact component={EditPage}></Route>
-          <Route component={Er}></Route>
+          <Route render={() => <Redirect to="/" />}></Route>
         </Switch>
         <Footer />
       </BrowserRouter>

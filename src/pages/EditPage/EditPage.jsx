@@ -10,6 +10,7 @@ import { changeTodoName } from "../../Redux/todos/todosActions";
 import { setTodoEdit } from "../../Redux/addForm/addFormActions";
 import { selectEditValue } from "../../Redux/addForm/addFormSelectore";
 import { setError } from "../../Redux/addForm/addFormActions";
+import { Redirect } from "react-router-dom";
 
 const EditPage = ({
   history,
@@ -28,36 +29,35 @@ const EditPage = ({
   };
 
   if (!todo) {
-    history.push("/");
-    return;
-  }
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <div className="edit-page">
+        <EditPageContainer>
+          <TodoListStyled edit>
+            <TodoListHeader
+              title="Edit todo"
+              btnTitle="back home"
+              goHome
+              btnFunc={() => {
+                history.push("/");
+                setErrorValue(null);
+              }}
+            />
+            {todo && <TodoItem editMode {...todo} editValue={editValue} />}
+          </TodoListStyled>
 
-  return (
-    <div className="edit-page">
-      <EditPageContainer>
-        <TodoListStyled edit>
-          <TodoListHeader
-            title="Edit todo"
-            btnTitle="back home"
-            goHome
-            btnFunc={() => {
-              history.push("/");
-              setErrorValue(null);
-            }}
+          <AddTodo
+            editMode
+            editInputValue={editValue}
+            editHandelChange={handelEditChange}
+            editTodo={changeName}
+            todoId={todo.id}
           />
-          {todo && <TodoItem editMode {...todo} editValue={editValue} />}
-        </TodoListStyled>
-
-        <AddTodo
-          editMode
-          editInputValue={editValue}
-          editHandelChange={handelEditChange}
-          editTodo={changeName}
-          todoId={todo.id}
-        />
-      </EditPageContainer>
-    </div>
-  );
+        </EditPageContainer>
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state, props) => ({
