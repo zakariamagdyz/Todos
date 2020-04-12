@@ -4,27 +4,33 @@ import {
   TodoSearchSelect,
   TodoSearchInput,
 } from "./todoSearchStyle";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectTodosType } from "../../Redux/todos/todosSelector";
 import { changeTodosType } from "../../Redux/todos/todosActions";
 import { setFilter } from "../../Redux/Filter/filterActions";
 import { selectFilterValue } from "../../Redux/Filter/filterSelector";
 
-const TodoSearch = ({ selectedValue, changeTodos, filter, setFilterValue }) => {
+const TodoSearch = () => {
+  // config
+  const dispatch = useDispatch();
+  const selectedValue = useSelector(selectTodosType);
+  const selectFilter = useSelector(selectFilterValue);
+
+  // fns
   const handelSelectChange = (e) => {
     const target = e.target.value;
-    changeTodos(target);
+    dispatch(changeTodosType(target));
   };
 
   const handelInputChange = (e) => {
-    setFilterValue(e.target.value);
+    dispatch(setFilter(e.target.value));
   };
 
   return (
     <div className="todo-search">
       <TodoSearchForm>
         <TodoSearchInput
-          value={filter}
+          value={selectFilter}
           onChange={handelInputChange}
         ></TodoSearchInput>
 
@@ -38,14 +44,4 @@ const TodoSearch = ({ selectedValue, changeTodos, filter, setFilterValue }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  changeTodos: (type) => dispatch(changeTodosType(type)),
-  setFilterValue: (value) => dispatch(setFilter(value)),
-});
-
-const mapStateToProps = (state) => ({
-  selectedValue: selectTodosType(state),
-  filter: selectFilterValue(state),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoSearch);
+export default TodoSearch;

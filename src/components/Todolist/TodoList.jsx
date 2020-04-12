@@ -3,14 +3,15 @@ import React from "react";
 import { TodolistText, TodoListStyled } from "./todoListStyle";
 import TodoItem from "../TodoItem/TodoItem";
 import TodoListData from "../TodoListData/TodolistData";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectTargetTodos } from "../../Redux/todos/todosSelector";
-import { createStructuredSelector } from "reselect";
 import { removeAllTodos } from "../../Redux/todos/todosActions";
 import TodoListHeader from "../TodolistHeader/TodoListHeader";
 
 //
-const TodoList = ({ targetTodos, removeAll }) => {
+const TodoList = () => {
+  const targetTodos = useSelector(selectTargetTodos);
+  const dispatch = useDispatch();
   return (
     <div className="todo-List">
       <TodoListStyled>
@@ -18,7 +19,7 @@ const TodoList = ({ targetTodos, removeAll }) => {
           title="Today's todo"
           btnTitle="remove all"
           btnFunc={() => {
-            removeAll(targetTodos);
+            dispatch(removeAllTodos(targetTodos));
           }}
           todos={targetTodos}
         />
@@ -41,15 +42,4 @@ const TodoList = ({ targetTodos, removeAll }) => {
 
 //
 
-const mapStateToProps = createStructuredSelector({
-  targetTodos: selectTargetTodos,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    removeAll: (arr) => dispatch(removeAllTodos(arr)),
-  };
-};
-
-export { TodoList };
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
+export default TodoList;

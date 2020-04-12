@@ -4,7 +4,7 @@ import { TodoListStyled } from "../../components/Todolist/todoListStyle";
 import TodoItem from "../../components/TodoItem/TodoItem";
 import AddTodo from "../../components/AddTodo/AddTodo";
 import { EditPageContainer } from "./EditPage.style";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectEditedTodo } from "../../Redux/todos/todosSelector";
 import { changeTodoName } from "../../Redux/todos/todosActions";
 import { setTodoEdit } from "../../Redux/addForm/addFormActions";
@@ -12,17 +12,19 @@ import { selectEditValue } from "../../Redux/addForm/addFormSelectore";
 import { setError } from "../../Redux/addForm/addFormActions";
 import { Redirect } from "react-router-dom";
 
-const EditPage = ({
-  history,
-  todo,
-  changeName,
-  setName,
-  editValue,
-  setErrorValue,
-}) => {
+const EditPage = (props) => {
+  //config
+  const dispatch = useDispatch();
+  const changeName = (data) => dispatch(changeTodoName(data));
+  const setName = (value) => dispatch(setTodoEdit(value));
+  const setErrorValue = (msg) => dispatch(setError(msg));
+
+  const todo = useSelector((state) => selectEditedTodo(state, props));
+  const editValue = useSelector(selectEditValue);
+
   useEffect(() => {
     setName(todo && todo.todoName);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handelEditChange = (e) => {
     setName(e.target.value);
@@ -40,7 +42,7 @@ const EditPage = ({
               btnTitle="back home"
               goHome
               btnFunc={() => {
-                history.push("/");
+                props.history.push("/");
                 setErrorValue(null);
               }}
             />
@@ -60,14 +62,4 @@ const EditPage = ({
   }
 };
 
-const mapStateToProps = (state, props) => ({
-  todo: selectEditedTodo(props.match.params.todoId)(state),
-  editValue: selectEditValue(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  changeName: (data) => dispatch(changeTodoName(data)),
-  setName: (value) => dispatch(setTodoEdit(value)),
-  setErrorValue: (msg) => dispatch(setError(msg)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(EditPage);
+export default EditPage;

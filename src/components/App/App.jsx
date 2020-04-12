@@ -6,8 +6,6 @@ import HomePage from "../../pages/HomePage/HomePage";
 import EditPage from "../../pages/EditPage/EditPage";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-const Er = () => <div>error</div>;
-
 const App = () => {
   return (
     <div className="app">

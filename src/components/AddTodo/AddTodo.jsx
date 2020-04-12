@@ -6,8 +6,8 @@ import {
   AddTodoStyled,
 } from "./addTodoStyle";
 
+import { useDispatch, useSelector } from "react-redux";
 import Error from "../Error/Error";
-import { connect } from "react-redux";
 import { addNewTodo } from "../../Redux/todos/todosActions";
 import { setError, setTodoInput } from "../../Redux/addForm/addFormActions";
 import { selectTargetTodos } from "../../Redux/todos/todosSelector";
@@ -16,18 +16,11 @@ import {
   selectErrorValue,
 } from "../../Redux/addForm/addFormSelectore";
 
-import { createStructuredSelector } from "reselect";
 import { withRouter } from "react-router-dom";
 
 //
 
 const AddTodo = ({
-  addTodo,
-  allTodos,
-  setErrorMsg,
-  setInput,
-  inputValue,
-  errorValue,
   history,
   editMode,
   editInputValue,
@@ -42,6 +35,11 @@ const AddTodo = ({
     sameName: "You have a todo with the same name",
   };
 
+  const targetTodos = useSelector(selectTargetTodos);
+  const addinputValue = useSelector(selectInputValue);
+  const errorValue = useSelector(selectErrorValue);
+  const dispatch = useDispatch();
+
   //Create Ref
   const inputRef = useRef();
 
@@ -51,37 +49,39 @@ const AddTodo = ({
 
   // Add Todo
   const defaultState = () => {
-    setErrorMsg(null);
-    setInput("");
+    dispatch(setError(null));
+    dispatch(setTodoInput(""));
   };
 
   const hanedelChange = (e) => {
-    setInput(e.target.value);
+    dispatch(setTodoInput(e.target.value));
   };
 
   const hideError = () => {
     setTimeout(() => {
-      setErrorMsg(null);
+      dispatch(setError(null));
     }, 3000);
   };
   // HANDEL SUBMIT
   const handelSubmit = (e) => {
     e.preventDefault();
-    const value = editMode ? editInputValue : inputValue;
+    const value = editMode ? editInputValue : addinputValue;
     //SHOW ERROR
     if (value.length > 50 || value.length < 4) {
-      setErrorMsg(value.length < 4 ? errorMsgs.less4 : errorMsgs.above50);
+      dispatch(
+        setError(value.length < 4 ? errorMsgs.less4 : errorMsgs.above50)
+      );
       hideError();
       return;
     }
     let isError = false;
-    allTodos.forEach((curr) => {
+    targetTodos.forEach((curr) => {
       if (curr.todoName.toLowerCase() === value.toLowerCase()) isError = true;
     });
 
     //SHOW ERROR
     if (isError) {
-      setErrorMsg(errorMsgs.sameName);
+      dispatch(setError(errorMsgs.sameName));
       hideError();
       return;
     }
@@ -90,7 +90,7 @@ const AddTodo = ({
       editTodo({ id: todoId, name: value.trim().toLowerCase() });
       history.push("/");
     } else {
-      addTodo({ todo: value.trim().toLowerCase() });
+      dispatch(addNewTodo({ todo: value.trim().toLowerCase() }));
     }
     //DEFAULT STATE
     defaultState();
@@ -104,7 +104,7 @@ const AddTodo = ({
             placeholder={!editMode ? "Create a new todo .." : ""}
             name="todo"
             required={!editMode && true}
-            value={!editMode ? inputValue : editInputValue}
+            value={!editMode ? addinputValue : editInputValue}
             onChange={!editMode ? hanedelChange : editHandelChange}
             autoComplete="off"
             ref={inputRef}
@@ -120,17 +120,4 @@ const AddTodo = ({
   );
 };
 
-const mapDispatchToprops = (dispatch) => ({
-  addTodo: (todoName) => dispatch(addNewTodo(todoName)),
-  setInput: (value) => dispatch(setTodoInput(value)),
-  setErrorMsg: (msg) => dispatch(setError(msg)),
-});
-
-const mapStateToprops = createStructuredSelector({
-  allTodos: selectTargetTodos,
-  inputValue: selectInputValue,
-  errorValue: selectErrorValue,
-});
-export default withRouter(
-  connect(mapStateToprops, mapDispatchToprops)(AddTodo)
-);
+export default withRouter(AddTodo);

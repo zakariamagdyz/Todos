@@ -3,7 +3,7 @@ import { TodoItemButton, TodoItemStyled, TodoItemTexts } from "./todoItemStyle";
 import moment from "moment";
 import { MdDelete, MdEdit, MdDone } from "react-icons/md";
 
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeTodo, changeTodoState } from "../../Redux/todos/todosActions";
 import { withRouter } from "react-router-dom";
 
@@ -15,12 +15,13 @@ const TodoItem = (props) => {
     todoName,
     createAt,
     completed,
-    remove,
-    changeState,
     history,
     editMode,
     editValue,
   } = props;
+
+  const dispatch = useDispatch();
+
   return (
     <TodoItemStyled active={completed && true} edit={editMode ? true : false}>
       <TodoItemTexts>
@@ -32,7 +33,7 @@ const TodoItem = (props) => {
         done
         active={completed && true}
         onClick={() => {
-          changeState(id);
+          dispatch(changeTodoState(id));
           editMode && history.push("/");
         }}
       >
@@ -49,7 +50,7 @@ const TodoItem = (props) => {
         delete
         active={completed && true}
         onClick={() => {
-          remove(id);
+          dispatch(removeTodo(id));
           editMode && history.push("/");
         }}
       >
@@ -59,9 +60,4 @@ const TodoItem = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  remove: (id) => dispatch(removeTodo(id)),
-  changeState: (id) => dispatch(changeTodoState(id)),
-});
-
-export default withRouter(connect(null, mapDispatchToProps)(TodoItem));
+export default withRouter(TodoItem);
