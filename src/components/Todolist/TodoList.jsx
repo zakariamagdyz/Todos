@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { TodolistText, TodoListStyled } from "./todoListStyle";
 import TodoItem from "../TodoItem/TodoItem";
@@ -10,8 +10,14 @@ import TodoListHeader from "../TodolistHeader/TodoListHeader";
 
 //
 const TodoList = () => {
+  ////////////////////logic
   const targetTodos = useSelector(selectTargetTodos);
   const dispatch = useDispatch();
+  const memoListFooter = useMemo(() => {
+    return <TodoListData />;
+  }, []);
+
+  ////////////////////view
   return (
     <div className="todo-List">
       <TodoListStyled>
@@ -34,7 +40,7 @@ const TodoList = () => {
           <TodolistText>There is nothing to show </TodolistText>
         )}
 
-        <TodoListData />
+        {memoListFooter}
       </TodoListStyled>
     </div>
   );

@@ -48,7 +48,7 @@ export const selectTargetTodos = createSelector(
 );
 
 export const selectEditedTodo = createSelector(
-  [selectAll, (_, props) => props.match.params.todoId],
+  [selectAll, (_, params) => params],
   (todos, id) => {
     return todos.find((todo) => todo.id === id);
   }

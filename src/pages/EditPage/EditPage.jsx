@@ -10,7 +10,7 @@ import { changeTodoName } from "../../Redux/todos/todosActions";
 import { setTodoEdit } from "../../Redux/addForm/addFormActions";
 import { selectEditValue } from "../../Redux/addForm/addFormSelectore";
 import { setError } from "../../Redux/addForm/addFormActions";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams, useHistory } from "react-router-dom";
 
 const EditPage = (props) => {
   //config
@@ -18,8 +18,10 @@ const EditPage = (props) => {
   const changeName = (data) => dispatch(changeTodoName(data));
   const setName = (value) => dispatch(setTodoEdit(value));
   const setErrorValue = (msg) => dispatch(setError(msg));
+  const params = useParams();
+  const history = useHistory();
 
-  const todo = useSelector((state) => selectEditedTodo(state, props));
+  const todo = useSelector((state) => selectEditedTodo(state, params.todoId));
   const editValue = useSelector(selectEditValue);
 
   useEffect(() => {
@@ -30,36 +32,32 @@ const EditPage = (props) => {
     setName(e.target.value);
   };
 
-  if (!todo) {
-    return <Redirect to="/" />;
-  } else {
-    return (
-      <div className="edit-page">
-        <EditPageContainer>
-          <TodoListStyled edit>
-            <TodoListHeader
-              title="Edit todo"
-              btnTitle="back home"
-              goHome
-              btnFunc={() => {
-                props.history.push("/");
-                setErrorValue(null);
-              }}
-            />
-            {todo && <TodoItem editMode {...todo} editValue={editValue} />}
-          </TodoListStyled>
-
-          <AddTodo
-            editMode
-            editInputValue={editValue}
-            editHandelChange={handelEditChange}
-            editTodo={changeName}
-            todoId={todo.id}
+  return (
+    <div className="edit-page">
+      <EditPageContainer>
+        <TodoListStyled edit>
+          <TodoListHeader
+            title="Edit todo"
+            btnTitle="back home"
+            goHome
+            btnFunc={() => {
+              history.push("/");
+              setErrorValue(null);
+            }}
           />
-        </EditPageContainer>
-      </div>
-    );
-  }
+          {todo && <TodoItem editMode {...todo} editValue={editValue} />}
+        </TodoListStyled>
+
+        <AddTodo
+          editMode
+          editInputValue={editValue}
+          editHandelChange={handelEditChange}
+          editTodo={changeName}
+          todoId={todo.id}
+        />
+      </EditPageContainer>
+    </div>
+  );
 };
 
 export default EditPage;

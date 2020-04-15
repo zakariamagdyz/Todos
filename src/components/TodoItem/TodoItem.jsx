@@ -5,22 +5,15 @@ import { MdDelete, MdEdit, MdDone } from "react-icons/md";
 
 import { useDispatch } from "react-redux";
 import { removeTodo, changeTodoState } from "../../Redux/todos/todosActions";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //
 
 const TodoItem = (props) => {
-  const {
-    id,
-    todoName,
-    createAt,
-    completed,
-    history,
-    editMode,
-    editValue,
-  } = props;
+  const { id, todoName, createAt, completed, editMode, editValue } = props;
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <TodoItemStyled active={completed && true} edit={editMode ? true : false}>
@@ -60,4 +53,4 @@ const TodoItem = (props) => {
   );
 };
 
-export default withRouter(TodoItem);
+export default React.memo(TodoItem);

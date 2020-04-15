@@ -21,6 +21,7 @@ export const HeaderTitle = styled.h1`
   color: #eee;
   margin-bottom: 0.5rem;
   text-shadow: ${textShadow};
+  cursor: pointer;
 `;
 
 export const HeaderSubtitle = styled.p`

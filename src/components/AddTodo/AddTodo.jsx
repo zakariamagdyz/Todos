@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import {
   AddTodoButton,
   AddTodoForm,
@@ -16,12 +16,11 @@ import {
   selectErrorValue,
 } from "../../Redux/addForm/addFormSelectore";
 
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //
 
 const AddTodo = ({
-  history,
   editMode,
   editInputValue,
   editHandelChange,
@@ -39,6 +38,15 @@ const AddTodo = ({
   const addinputValue = useSelector(selectInputValue);
   const errorValue = useSelector(selectErrorValue);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const memoButton = useMemo(
+    () => (
+      <AddTodoButton edit={editMode ? true : false}>
+        {!editMode ? "Add todo" : "Save edit"}
+      </AddTodoButton>
+    ),
+    [editMode]
+  );
 
   //Create Ref
   const inputRef = useRef();
@@ -109,9 +117,7 @@ const AddTodo = ({
             autoComplete="off"
             ref={inputRef}
           />
-          <AddTodoButton edit={editMode ? true : false}>
-            {!editMode ? "Add todo" : "Save edit"}
-          </AddTodoButton>
+          {memoButton}
         </AddTodoForm>
 
         {errorValue && <Error msg={errorValue} />}
@@ -120,4 +126,4 @@ const AddTodo = ({
   );
 };
 
-export default withRouter(AddTodo);
+export default React.memo(AddTodo);

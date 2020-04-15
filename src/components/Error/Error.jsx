@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { ErrorMsg } from "./errorStyle";
+import { ErrorMsg } from "./Error.style";
 
 const Error = ({ msg }) => {
   return (
@@ -9,4 +9,4 @@ const Error = ({ msg }) => {
   );
 };
 
-export default Error;
+export default React.memo(Error);
