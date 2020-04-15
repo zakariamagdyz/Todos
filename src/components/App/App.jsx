@@ -5,6 +5,7 @@ import Footer from "./../Footer/Footer";
 import Spinner from "../Spinner/Spinner";
 import Errorboundary from "../Error-boundary/ErrorBoundry";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import NotFoundPage from "../Not-found/NotFoundPage";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const EditPage = lazy(() => import("../../pages/EditPage/EditPage"));
@@ -15,18 +16,19 @@ const App = () => {
       <BrowserRouter>
         <GlobalStyle />
         <Header />
-        <Switch>
-          <Errorboundary>
-            <Suspense fallback={Spinner}>
-              <Route path="/" exact>
-                <HomePage />
-              </Route>
+        <Errorboundary>
+          <Suspense fallback={<Spinner />}>
+            <Switch>
+              <Route path="/" exact component={HomePage} />
               <Route path="/edit/:todoId" exact>
                 <EditPage />
               </Route>
-            </Suspense>
-          </Errorboundary>
-        </Switch>
+              <Route>
+                <NotFoundPage />
+              </Route>
+            </Switch>
+          </Suspense>
+        </Errorboundary>
 
         <Footer />
       </BrowserRouter>

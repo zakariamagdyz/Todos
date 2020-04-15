@@ -8,7 +8,8 @@ import { selectTargetTodos } from "../../Redux/todos/todosSelector";
 import { removeAllTodos } from "../../Redux/todos/todosActions";
 import TodoListHeader from "../TodolistHeader/TodoListHeader";
 
-//
+///////////////////////////
+
 const TodoList = () => {
   ////////////////////logic
   const targetTodos = useSelector(selectTargetTodos);

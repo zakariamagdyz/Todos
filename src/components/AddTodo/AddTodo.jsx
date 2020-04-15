@@ -20,13 +20,7 @@ import { useHistory } from "react-router-dom";
 
 //
 
-const AddTodo = ({
-  editMode,
-  editInputValue,
-  editHandelChange,
-  editTodo,
-  todoId,
-}) => {
+const AddTodo = ({ editMode, todoId }) => {
   // ErrorMsgs
   const errorMsgs = {
     above50: "Your todo charecters is more than 50 characters",
@@ -73,7 +67,7 @@ const AddTodo = ({
   // HANDEL SUBMIT
   const handelSubmit = (e) => {
     e.preventDefault();
-    const value = editMode ? editInputValue : addinputValue;
+    const value = editMode ? editMode.inputValue : addinputValue;
     //SHOW ERROR
     if (value.length > 50 || value.length < 4) {
       dispatch(
@@ -95,7 +89,7 @@ const AddTodo = ({
     }
     //ADD TODO
     if (editMode) {
-      editTodo({ id: todoId, name: value.trim().toLowerCase() });
+      editMode.setTargetName({ id: todoId, name: value.trim().toLowerCase() });
       history.push("/");
     } else {
       dispatch(addNewTodo({ todo: value.trim().toLowerCase() }));

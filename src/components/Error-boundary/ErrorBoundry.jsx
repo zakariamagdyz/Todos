@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  ErrorImageContainer,
-  ErrorImageOverlay,
-  ErrorImageText,
-} from "./ErrorBoundry.style.jsx";
+import NotFound from "../Not-found/NotFoundPage";
 
 export default class ErrorBoundary extends React.Component {
   state = { hasError: false };
@@ -14,12 +10,7 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <ErrorImageOverlay>
-          <ErrorImageContainer></ErrorImageContainer>
-          <ErrorImageText>Page not found </ErrorImageText>
-        </ErrorImageOverlay>
-      );
+      return <NotFound />;
     }
 
     return this.props.children;

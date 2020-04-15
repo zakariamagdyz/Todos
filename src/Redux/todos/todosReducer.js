@@ -1,19 +1,24 @@
 import { todosTypes } from "./todosTypes";
-import { changeTodoState, changeTodoName } from "./todosUtils";
+import {
+  changeTodoState,
+  changeTodoName,
+  addTodoToTimeFrame,
+} from "./todosUtils";
 import { removeAllSection } from "./todosUtils";
 
 const INITAL_TODOS_DATA = {
-  allTodos: [],
+  yearlyTodos: [],
+  monthlyTodos: [],
+  weeklyTodos: [],
+  dailyTodos: [],
   todosValue: "3",
 };
 
 export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
   switch (action.type) {
     case todosTypes.ADD_NEW_TODO:
-      return {
-        ...state,
-        allTodos: [...state.allTodos, action.payload],
-      };
+      return addTodoToTimeFrame(state, action.payload);
+
     case todosTypes.REMOVE_ALL_TODOS:
       return {
         ...state,

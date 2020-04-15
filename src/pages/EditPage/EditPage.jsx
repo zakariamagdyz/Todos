@@ -10,27 +10,36 @@ import { changeTodoName } from "../../Redux/todos/todosActions";
 import { setTodoEdit } from "../../Redux/addForm/addFormActions";
 import { selectEditValue } from "../../Redux/addForm/addFormSelectore";
 import { setError } from "../../Redux/addForm/addFormActions";
-import { Redirect, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const EditPage = (props) => {
-  //config
+  /////////// logic
+  //Data
   const dispatch = useDispatch();
-  const changeName = (data) => dispatch(changeTodoName(data));
-  const setName = (value) => dispatch(setTodoEdit(value));
-  const setErrorValue = (msg) => dispatch(setError(msg));
   const params = useParams();
   const history = useHistory();
 
-  const todo = useSelector((state) => selectEditedTodo(state, params.todoId));
-  const editValue = useSelector(selectEditValue);
+  //Actions=
 
+  const editModeConfig = {
+    targetTodo: useSelector((state) => selectEditedTodo(state, params.todoId)),
+    inputValue: useSelector(selectEditValue),
+    handelInputchange(e) {
+      this.changeTargetName(e.target.value);
+    },
+    changeTargetName: (data) => dispatch(changeTodoName(data)),
+    setTargetName: (value) => dispatch(setTodoEdit(value)),
+    setError: (msg) => dispatch(setError(msg)),
+  };
+
+  // life cycle
   useEffect(() => {
-    setName(todo && todo.todoName);
+    this.changeTargetName(
+      editModeConfig.targetTodo && editModeConfig.targetTodo.todoName
+    );
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handelEditChange = (e) => {
-    setName(e.target.value);
-  };
+  /////////view
 
   return (
     <div className="edit-page">
@@ -45,16 +54,10 @@ const EditPage = (props) => {
               setErrorValue(null);
             }}
           />
-          {todo && <TodoItem editMode {...todo} editValue={editValue} />}
+          {todo && <TodoItem editMode={editModeConfig} {...todo} />}
         </TodoListStyled>
 
-        <AddTodo
-          editMode
-          editInputValue={editValue}
-          editHandelChange={handelEditChange}
-          editTodo={changeName}
-          todoId={todo.id}
-        />
+        <AddTodo editMode={editModeConfig} todoId={todo.id} />
       </EditPageContainer>
     </div>
   );

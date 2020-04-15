@@ -33,3 +33,22 @@ export const removeAllSection = (allTodos, targetTodos) => {
     return notExist;
   });
 };
+
+export const addTodoToTimeFrame = (state, todo) => {
+  switch (todo.timeFrame) {
+    case "yearly":
+      return { ...state, yearlyTodos: [...state.yearlyTodo, todo] };
+
+    case "monthly":
+      return { ...state, monthlyTodos: [state.monthlyTodos, todo] };
+
+    case "weekly":
+      return { ...state, weeklyTodos: [...state.weeklyTodos, todo] };
+
+    case "daily":
+      return { ...state, dailyTodos: [state.dailyTodos, todo] };
+
+    default:
+      return state;
+  }
+};

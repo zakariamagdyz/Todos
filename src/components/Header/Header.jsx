@@ -13,7 +13,16 @@ const Header = () => {
     <div className="header">
       <HeaderStyled>
         <Container>
-          <HeaderTitle onClick={() => history.push("/")}>Todo App</HeaderTitle>
+          <HeaderTitle
+            onClick={() => {
+              // go to home
+              history.push("/");
+              //refresh the page
+              window.location.reload();
+            }}
+          >
+            Todo App
+          </HeaderTitle>
           <HeaderSubtitle>A new step to organize your life</HeaderSubtitle>
         </Container>
       </HeaderStyled>
