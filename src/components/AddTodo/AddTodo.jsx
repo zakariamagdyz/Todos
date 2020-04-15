@@ -89,7 +89,10 @@ const AddTodo = ({ editMode, todoId }) => {
     }
     //ADD TODO
     if (editMode) {
-      editMode.setTargetName({ id: todoId, name: value.trim().toLowerCase() });
+      editMode.setTargetName({
+        id: editMode.targetTodo.id,
+        name: value.trim().toLowerCase(),
+      });
       history.push("/");
     } else {
       dispatch(addNewTodo({ todo: value.trim().toLowerCase() }));
@@ -107,7 +110,7 @@ const AddTodo = ({ editMode, todoId }) => {
             name="todo"
             required={!editMode && true}
             value={!editMode ? addinputValue : editInputValue}
-            onChange={!editMode ? hanedelChange : editHandelChange}
+            onChange={!editMode ? hanedelChange : editMode.handelInputchange}
             autoComplete="off"
             ref={inputRef}
           />

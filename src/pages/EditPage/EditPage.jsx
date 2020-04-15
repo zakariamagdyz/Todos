@@ -25,7 +25,7 @@ const EditPage = (props) => {
     targetTodo: useSelector((state) => selectEditedTodo(state, params.todoId)),
     inputValue: useSelector(selectEditValue),
     handelInputchange(e) {
-      this.changeTargetName(e.target.value);
+      this.setTargetName(e.target.value);
     },
     changeTargetName: (data) => dispatch(changeTodoName(data)),
     setTargetName: (value) => dispatch(setTodoEdit(value)),
@@ -34,7 +34,7 @@ const EditPage = (props) => {
 
   // life cycle
   useEffect(() => {
-    this.changeTargetName(
+    this.setTargetName(
       editModeConfig.targetTodo && editModeConfig.targetTodo.todoName
     );
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -51,13 +51,19 @@ const EditPage = (props) => {
             goHome
             btnFunc={() => {
               history.push("/");
-              setErrorValue(null);
+              editModeConfig.setError(null);
             }}
           />
-          {todo && <TodoItem editMode={editModeConfig} {...todo} />}
+
+          {editModeConfig.targetTodo && (
+            <TodoItem
+              editMode={editModeConfig}
+              {...editModeConfig.targetTodo}
+            />
+          )}
         </TodoListStyled>
 
-        <AddTodo editMode={editModeConfig} todoId={todo.id} />
+        <AddTodo editMode={editModeConfig} />
       </EditPageContainer>
     </div>
   );
