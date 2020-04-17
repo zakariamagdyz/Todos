@@ -8,6 +8,25 @@ export const changeTodoState = (todos, payload) => {
   });
 };
 
+export const changeToComplete = (todos, payload) => {
+  return todos.map((todo) => {
+    if (todo.id === payload) {
+      return { ...todo, completed: true };
+    }
+
+    return todo;
+  });
+};
+
+export const changeToUncomplete = (todos, payload) => {
+  return todos.map((todo) => {
+    if (todo.id === payload) {
+      return { ...todo, completed: false };
+    }
+
+    return todo;
+  });
+};
 export const changeTodoName = (todos, payload) => {
   return todos.map((todo) => {
     if (todo.id === payload.id) {
@@ -32,23 +51,4 @@ export const removeAllSection = (allTodos, targetTodos) => {
 
     return notExist;
   });
-};
-
-export const addTodoToTimeFrame = (state, todo) => {
-  switch (todo.timeFrame) {
-    case "yearly":
-      return { ...state, yearlyTodos: [...state.yearlyTodo, todo] };
-
-    case "monthly":
-      return { ...state, monthlyTodos: [state.monthlyTodos, todo] };
-
-    case "weekly":
-      return { ...state, weeklyTodos: [...state.weeklyTodos, todo] };
-
-    case "daily":
-      return { ...state, dailyTodos: [state.dailyTodos, todo] };
-
-    default:
-      return state;
-  }
 };

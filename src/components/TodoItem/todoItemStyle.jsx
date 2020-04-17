@@ -79,6 +79,12 @@ const editButton = css`
     color: #3498db;
   }
 `;
+const lockButton = css`
+  margin-right: 1rem;
+  :hover {
+    color: #ce9b80;
+  }
+`;
 
 const TodoItemButton = styled.button`
   font-size: 2.5rem;
@@ -91,6 +97,7 @@ const TodoItemButton = styled.button`
   ${(props) => props.delete && deleteButton}
   ${(props) => props.done && doneButton}
   ${(props) => props.edit && editButton}
+  ${(props) => props.lock && lockButton}
   &:hover {
     transform: translateY(-0.1rem);
   }

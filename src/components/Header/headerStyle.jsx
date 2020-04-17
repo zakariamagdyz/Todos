@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { NavLink } from "react-router-dom";
 
 const textShadow = "0rem 1rem 0.5rem rgba(0, 0, 0, 0.3)";
 
@@ -12,6 +13,9 @@ export const HeaderStyled = styled.div`
 export const Container = styled.div`
   max-width: 114rem;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const HeaderTitle = styled.h1`
@@ -30,4 +34,27 @@ export const HeaderSubtitle = styled.p`
   font-size: 1.4rem;
   color: #ccc;
   text-shadow: ${textShadow};
+`;
+
+export const HeaderNav = styled.div`
+  margin-left: auto;
+  margin-right: 2rem;
+`;
+
+export const Link = styled(NavLink)`
+  text-decoration: none;
+  color: #ce9b80;
+  font-size: 1.8rem;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.5rem;
+
+  &:not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  :hover {
+    color: #ac7253;
+    border-bottom: 1px solid #ac7253;
+  }
 `;

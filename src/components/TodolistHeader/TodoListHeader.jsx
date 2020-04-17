@@ -5,13 +5,30 @@ import {
   TodoListRemove,
 } from "./TodoListHeaderStyle";
 
-const TodoListHeader = ({ goHome, btnTitle, title, btnFunc, todos = [] }) => {
+import { useHistory } from "react-router-dom";
+
+const TodoListHeader = ({
+  goHome,
+  btnTitle,
+  title,
+  btnFunc,
+  todos = [],
+  time,
+  editMode,
+}) => {
+  const history = useHistory();
   return (
     <div className="todo-list-header">
       <TodoListInfo>
         <TodoListTitle>{title}</TodoListTitle>
-        {todos.length || goHome ? (
+        {goHome ? (
           <TodoListRemove onClick={btnFunc}>{btnTitle}</TodoListRemove>
+        ) : null}
+
+        {time && !editMode ? (
+          <TodoListRemove onClick={() => history.push(`/${time}-todos`)}>
+            go up{" "}
+          </TodoListRemove>
         ) : null}
       </TodoListInfo>
     </div>

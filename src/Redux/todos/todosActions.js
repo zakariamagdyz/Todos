@@ -1,14 +1,15 @@
 import { todosTypes } from "./todosTypes";
 import { v4 } from "uuid";
 
-export const addNewTodo = ({ todo, timeFrame }) => ({
+export const addNewTodo = ({ todo, timeFrame, parentId }) => ({
   type: todosTypes.ADD_NEW_TODO,
   payload: {
     id: v4(),
-    createAt: new Date().getTime(),
     todoName: todo,
+    createAt: new Date().getTime(),
     completed: false,
     timeFrame,
+    parentId,
   },
 });
 
@@ -24,6 +25,16 @@ export const removeTodo = (id) => ({
 
 export const changeTodoState = (id) => ({
   type: todosTypes.CHANGE_TODO_STATE,
+  payload: id,
+});
+
+export const changeTodoToComplete = (id) => ({
+  type: todosTypes.CHANGE_TO_COMPLETE,
+  payload: id,
+});
+
+export const changeTodoToUncomplete = (id) => ({
+  type: todosTypes.CHANGE_TO_UNCOMPLETE,
   payload: id,
 });
 

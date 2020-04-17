@@ -12,6 +12,7 @@ const TodoListTitle = styled.h3`
   margin-bottom: 1rem;
   font-size: 2.4rem;
   text-shadow: 0rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
+  text-transform: capitalize;
 `;
 const TodoListRemove = styled.button`
   background: none;

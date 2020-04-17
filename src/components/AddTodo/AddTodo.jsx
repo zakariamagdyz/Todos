@@ -18,17 +18,20 @@ import {
 
 import { useHistory } from "react-router-dom";
 
-//
+////////////////////////////////////////////////////////////////
 
-const AddTodo = ({ editMode, todoId }) => {
+const AddTodo = ({ editMode, timeFrame, parentId }) => {
   // ErrorMsgs
   const errorMsgs = {
     above50: "Your todo charecters is more than 50 characters",
     less4: "Your todo charecters is less than 4 characters",
     sameName: "You have a todo with the same name",
   };
+  const todoSearchData = { timeFrame, parentId };
 
-  const targetTodos = useSelector(selectTargetTodos);
+  const targetTodos = useSelector((state) =>
+    selectTargetTodos(state, todoSearchData)
+  );
   const addinputValue = useSelector(selectInputValue);
   const errorValue = useSelector(selectErrorValue);
   const dispatch = useDispatch();
@@ -36,10 +39,10 @@ const AddTodo = ({ editMode, todoId }) => {
   const memoButton = useMemo(
     () => (
       <AddTodoButton edit={editMode ? true : false}>
-        {!editMode ? "Add todo" : "Save edit"}
+        {!editMode ? `Add ${timeFrame} todo` : "Save edit"}
       </AddTodoButton>
     ),
-    [editMode]
+    [editMode, timeFrame]
   );
 
   //Create Ref
@@ -89,13 +92,15 @@ const AddTodo = ({ editMode, todoId }) => {
     }
     //ADD TODO
     if (editMode) {
-      editMode.setTargetName({
+      editMode.changeTargetName({
         id: editMode.targetTodo.id,
         name: value.trim().toLowerCase(),
       });
-      history.push("/");
+      history.push(`/${timeFrame}-todos`);
     } else {
-      dispatch(addNewTodo({ todo: value.trim().toLowerCase() }));
+      dispatch(
+        addNewTodo({ todo: value.trim().toLowerCase(), timeFrame, parentId })
+      );
     }
     //DEFAULT STATE
     defaultState();
@@ -109,8 +114,12 @@ const AddTodo = ({ editMode, todoId }) => {
             placeholder={!editMode ? "Create a new todo .." : ""}
             name="todo"
             required={!editMode && true}
-            value={!editMode ? addinputValue : editInputValue}
-            onChange={!editMode ? hanedelChange : editMode.handelInputchange}
+            value={!editMode ? addinputValue : editMode.inputValue}
+            onChange={
+              !editMode
+                ? hanedelChange
+                : editMode.handelInputchange.bind(editMode)
+            }
             autoComplete="off"
             ref={inputRef}
           />

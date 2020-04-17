@@ -7,7 +7,7 @@ import Errorboundary from "../Error-boundary/ErrorBoundry";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NotFoundPage from "../Not-found/NotFoundPage";
 
-const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
+const TodoPage = lazy(() => import("../../pages/Todo-Page/TodoPage"));
 const EditPage = lazy(() => import("../../pages/EditPage/EditPage"));
 
 const App = () => {
@@ -19,10 +19,30 @@ const App = () => {
         <Errorboundary>
           <Suspense fallback={<Spinner />}>
             <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/edit/:todoId" exact>
+              <Route path="/" exact>
+                <div>asdsad</div>
+              </Route>
+              <Route path="/yearly-todos">
+                <TodoPage title="Yearly todo" timeFrame="yearly" />
+              </Route>
+
+              <Route path="/monthly-todos">
+                <TodoPage title="Monthly todo" timeFrame="monthly" />
+              </Route>
+
+              <Route path="/weekly-todos">
+                <TodoPage title="Weekly todo" timeFrame="weekly" />
+              </Route>
+              <Route path="/daily-todos">
+                <TodoPage title="Daily todo" timeFrame="daily" />
+              </Route>
+              <Route path="/edit/:todoId">
                 <EditPage />
               </Route>
+              <Route path="/:parentId">
+                <TodoPage />
+              </Route>
+
               <Route>
                 <NotFoundPage />
               </Route>

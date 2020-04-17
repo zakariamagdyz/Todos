@@ -12,7 +12,7 @@ import { selectEditValue } from "../../Redux/addForm/addFormSelectore";
 import { setError } from "../../Redux/addForm/addFormActions";
 import { useParams, useHistory } from "react-router-dom";
 
-const EditPage = (props) => {
+const EditPage = () => {
   /////////// logic
   //Data
   const dispatch = useDispatch();
@@ -32,11 +32,17 @@ const EditPage = (props) => {
     setError: (msg) => dispatch(setError(msg)),
   };
 
+  const time = editModeConfig.targetTodo.timeFrame;
+
   // life cycle
   useEffect(() => {
-    this.setTargetName(
-      editModeConfig.targetTodo && editModeConfig.targetTodo.todoName
-    );
+    try {
+      editModeConfig.setTargetName(
+        editModeConfig.targetTodo.id && editModeConfig.targetTodo.todoName
+      );
+    } catch (e) {
+      history.push("/error");
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /////////view
@@ -46,11 +52,12 @@ const EditPage = (props) => {
       <EditPageContainer>
         <TodoListStyled edit>
           <TodoListHeader
+            editMode
             title="Edit todo"
-            btnTitle="back home"
+            btnTitle="back"
             goHome
             btnFunc={() => {
-              history.push("/");
+              history.push(`/${time}-todos`);
               editModeConfig.setError(null);
             }}
           />
@@ -63,7 +70,7 @@ const EditPage = (props) => {
           )}
         </TodoListStyled>
 
-        <AddTodo editMode={editModeConfig} />
+        <AddTodo editMode={editModeConfig} timeFrame={time} />
       </EditPageContainer>
     </div>
   );

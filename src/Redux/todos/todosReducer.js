@@ -2,22 +2,20 @@ import { todosTypes } from "./todosTypes";
 import {
   changeTodoState,
   changeTodoName,
-  addTodoToTimeFrame,
+  changeToComplete,
+  changeToUncomplete,
 } from "./todosUtils";
 import { removeAllSection } from "./todosUtils";
 
 const INITAL_TODOS_DATA = {
-  yearlyTodos: [],
-  monthlyTodos: [],
-  weeklyTodos: [],
-  dailyTodos: [],
+  allTodos: [],
   todosValue: "3",
 };
 
 export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
   switch (action.type) {
     case todosTypes.ADD_NEW_TODO:
-      return addTodoToTimeFrame(state, action.payload);
+      return { ...state, allTodos: [...state.allTodos, action.payload] };
 
     case todosTypes.REMOVE_ALL_TODOS:
       return {
@@ -28,7 +26,10 @@ export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
     case todosTypes.REMOVE_TODO:
       return {
         ...state,
-        allTodos: state.allTodos.filter((todo) => todo.id !== action.payload),
+        allTodos: state.allTodos.filter(
+          (todo) =>
+            todo.id !== action.payload && todo.parentId !== action.payload
+        ),
       };
 
     case todosTypes.CHANGE_TODO_STATE:
@@ -44,6 +45,18 @@ export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
       return {
         ...state,
         allTodos: changeTodoName(state.allTodos, action.payload),
+      };
+
+    case todosTypes.CHANGE_TO_COMPLETE:
+      return {
+        ...state,
+        allTodos: changeToComplete(state.allTodos, action.payload),
+      };
+
+    case todosTypes.CHANGE_TO_UNCOMPLETE:
+      return {
+        ...state,
+        allTodos: changeToUncomplete(state.allTodos, action.payload),
       };
 
     default:
