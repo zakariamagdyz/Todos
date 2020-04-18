@@ -97,3 +97,10 @@ export const selectEditedTodo = createSelector(
     return todos.find((todo) => todo.id === id);
   }
 );
+
+export const isNested = createSelector(
+  [selectAll, (_, parentId) => parentId],
+  (allTodos, parentId) => {
+    return allTodos.find((todo) => todo.parentId === parentId);
+  }
+);

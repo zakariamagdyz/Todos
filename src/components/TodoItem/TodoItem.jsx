@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { TodoItemButton, TodoItemStyled, TodoItemTexts } from "./todoItemStyle";
+import {
+  TodoItemButton,
+  TodoItemStyled,
+  TodoItemTexts,
+  TodoItemsTools,
+} from "./todoItemStyle";
 import moment from "moment";
 import { MdDelete, MdEdit, MdDone, MdLockOpen } from "react-icons/md";
 
@@ -7,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { removeTodo, changeTodoState } from "../../Redux/todos/todosActions";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectTargetTodos } from "../../Redux/todos/todosSelector";
+import { selectTargetTodos, isNested } from "../../Redux/todos/todosSelector";
 import {
   changeTodoToComplete,
   changeTodoToUncomplete,
@@ -64,6 +69,10 @@ const TodoItem = (props) => {
       }
     } catch (e) {}
   }, [completed]);
+
+  // check if todo is a parent to hide complete checker
+
+  const ifNested = useSelector((state) => isNested(state, id));
   //////////view
 
   return (
@@ -73,39 +82,43 @@ const TodoItem = (props) => {
         <p>{moment(createAt).fromNow()}</p>
       </TodoItemTexts>
 
-      <TodoItemButton
-        done
-        active={completed && true}
-        onClick={() => {
-          dispatch(changeTodoState(id));
-          editMode && history.push(`/${timeFrame}-todos`);
-        }}
-      >
-        <MdDone />
-      </TodoItemButton>
+      <TodoItemsTools>
+        {!ifNested && (
+          <TodoItemButton
+            done
+            active={completed && true}
+            onClick={() => {
+              dispatch(changeTodoState(id));
+              editMode && history.push(`/${timeFrame}-todos`);
+            }}
+          >
+            <MdDone />
+          </TodoItemButton>
+        )}
 
-      {timeFrame !== "daily" && (
-        <TodoItemButton lock onClick={() => history.push(`/${id}`)}>
-          <MdLockOpen />
+        {timeFrame !== "daily" && (
+          <TodoItemButton lock onClick={() => history.push(`/${id}`)}>
+            <MdLockOpen />
+          </TodoItemButton>
+        )}
+
+        {!editMode && !completed ? (
+          <TodoItemButton edit onClick={() => history.push(`/edit/${id}`)}>
+            <MdEdit />
+          </TodoItemButton>
+        ) : null}
+
+        <TodoItemButton
+          delete
+          active={completed && true}
+          onClick={() => {
+            dispatch(removeTodo(id));
+            editMode && history.push(`/${timeFrame}-todos`);
+          }}
+        >
+          <MdDelete />
         </TodoItemButton>
-      )}
-
-      {!editMode && !completed ? (
-        <TodoItemButton edit onClick={() => history.push(`/edit/${id}`)}>
-          <MdEdit />
-        </TodoItemButton>
-      ) : null}
-
-      <TodoItemButton
-        delete
-        active={completed && true}
-        onClick={() => {
-          dispatch(removeTodo(id));
-          editMode && history.push(`/${timeFrame}-todos`);
-        }}
-      >
-        <MdDelete />
-      </TodoItemButton>
+      </TodoItemsTools>
     </TodoItemStyled>
   );
 };

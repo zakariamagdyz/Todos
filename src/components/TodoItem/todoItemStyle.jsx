@@ -2,7 +2,7 @@ import styled, { css } from "styled-components/macro";
 
 const activeDisabled = css`
   opacity: 0.5;
-  > div::after {
+  > div:first-child::after {
     content: "";
     background: #e74c3c;
     width: 115%;
@@ -30,6 +30,7 @@ const TodoItemStyled = styled.div`
   color: #eee;
   background: ${(props) => props.edit && "#305477"};
   display: flex;
+  justify-content: space-between;
   margin: 1rem 0;
   border: 0.1rem solid #507192;
   padding: 1rem;
@@ -56,6 +57,8 @@ const TodoItemTexts = styled.div`
   }
 `;
 
+export const TodoItemsTools = styled.div``;
+
 const deleteButton = css`
   color: ${(props) => props.active && "#e74c3c"};
   &:hover {
@@ -64,7 +67,6 @@ const deleteButton = css`
 `;
 
 const doneButton = css`
-  margin-left: auto;
   margin-right: 1rem;
   font-size: 3.2rem;
   color: ${(props) => props.active && "#27ae60"};
