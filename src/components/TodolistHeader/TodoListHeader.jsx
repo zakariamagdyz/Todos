@@ -3,9 +3,14 @@ import {
   TodoListInfo,
   TodoListTitle,
   TodoListRemove,
+  ArrowBack,
+  ArrowForward,
+  ArrowsContainer,
 } from "./TodoListHeaderStyle";
 
 import { useHistory } from "react-router-dom";
+
+/////////////
 
 const TodoListHeader = ({
   goHome,
@@ -21,15 +26,34 @@ const TodoListHeader = ({
     <div className="todo-list-header">
       <TodoListInfo>
         <TodoListTitle>{title}</TodoListTitle>
-        {goHome ? (
-          <TodoListRemove onClick={btnFunc}>{btnTitle}</TodoListRemove>
-        ) : null}
+        <ArrowsContainer>
+          {goHome ? (
+            <TodoListRemove onClick={btnFunc}>
+              <ArrowBack />
+              go back
+            </TodoListRemove>
+          ) : null}
 
-        {time && !editMode ? (
-          <TodoListRemove onClick={() => history.push(`/${time}-todos`)}>
-            go up{" "}
-          </TodoListRemove>
-        ) : null}
+          {!editMode ? (
+            <TodoListRemove
+              onClick={() => history.push(`/${time.timeUp}-todos`)}
+              disabled={!time.timeUp}
+            >
+              <ArrowBack />
+              Up
+            </TodoListRemove>
+          ) : null}
+
+          {!editMode ? (
+            <TodoListRemove
+              onClick={() => history.push(`/${time.timeDown}-todos`)}
+              disabled={!time.timeDown}
+            >
+              Down
+              <ArrowForward />
+            </TodoListRemove>
+          ) : null}
+        </ArrowsContainer>
       </TodoListInfo>
     </div>
   );

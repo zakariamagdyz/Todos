@@ -32,7 +32,9 @@ const EditPage = () => {
     setError: (msg) => dispatch(setError(msg)),
   };
 
-  const time = editModeConfig.targetTodo.timeFrame;
+  const time = editModeConfig.targetTodo
+    ? editModeConfig.targetTodo.timeFrame
+    : {};
 
   // life cycle
   useEffect(() => {

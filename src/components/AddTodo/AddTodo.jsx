@@ -22,6 +22,7 @@ import { useHistory } from "react-router-dom";
 
 const AddTodo = ({ editMode, timeFrame, parentId }) => {
   // ErrorMsgs
+
   const errorMsgs = {
     above50: "Your todo charecters is more than 50 characters",
     less4: "Your todo charecters is less than 4 characters",

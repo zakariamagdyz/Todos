@@ -83,7 +83,17 @@ const TodoItem = (props) => {
       </TodoItemTexts>
 
       <TodoItemsTools>
-        {!ifNested && (
+        {timeFrame !== "daily" && (
+          <TodoItemButton
+            parent={ifNested}
+            lock
+            onClick={() => history.push(`/${id}`)}
+          >
+            <MdLockOpen />
+          </TodoItemButton>
+        )}
+
+        {timeFrame === "daily" && (
           <TodoItemButton
             done
             active={completed && true}
@@ -96,13 +106,7 @@ const TodoItem = (props) => {
           </TodoItemButton>
         )}
 
-        {timeFrame !== "daily" && (
-          <TodoItemButton lock onClick={() => history.push(`/${id}`)}>
-            <MdLockOpen />
-          </TodoItemButton>
-        )}
-
-        {!editMode && !completed ? (
+        {!editMode || !completed ? (
           <TodoItemButton edit onClick={() => history.push(`/edit/${id}`)}>
             <MdEdit />
           </TodoItemButton>

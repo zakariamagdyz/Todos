@@ -30,7 +30,8 @@ const TodoList = ({ timeFrame, title, parentId, targetDetaildTodo }) => {
   const getMonth = () => {
     return allTimeFrames.findIndex((month) => month === timeFrame);
   };
-  const time = allTimeFrames[getMonth() - 1];
+  const timeUp = allTimeFrames[getMonth() - 1];
+  const timeDown = allTimeFrames[getMonth() + 1];
 
   ////////////////////view
   return (
@@ -43,7 +44,7 @@ const TodoList = ({ timeFrame, title, parentId, targetDetaildTodo }) => {
             dispatch(removeAllTodos(targetTodos));
           }}
           todos={targetTodos}
-          time={time}
+          time={{ timeUp, timeDown }}
         />
 
         {targetTodos.length ? (

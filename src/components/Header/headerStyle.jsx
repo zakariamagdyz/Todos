@@ -43,7 +43,7 @@ export const HeaderNav = styled.div`
 
 export const Link = styled(NavLink)`
   text-decoration: none;
-  color: #ce9b80;
+  color: #ccc;
   font-size: 1.8rem;
   transition: color 0.2s ease;
   border-bottom: 1px solid transparent;
@@ -55,6 +55,6 @@ export const Link = styled(NavLink)`
 
   :hover {
     color: #ac7253;
-    border-bottom: 1px solid #ac7253;
+    border-bottom: 1px solid #eee;
   }
 `;

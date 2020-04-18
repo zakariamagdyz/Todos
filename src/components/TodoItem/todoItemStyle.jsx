@@ -41,7 +41,9 @@ const TodoItemStyled = styled.div`
 
 const TodoItemTexts = styled.div`
   position: relative;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   p:first-child {
     text-transform: capitalize;
     font-size: 1.9rem;
@@ -49,46 +51,50 @@ const TodoItemTexts = styled.div`
   }
 
   p:last-child {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-style: italic;
     margin-top: 1rem;
+    opacity: 0.6;
     color: #ccc;
     text-shadow: 0rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
   }
 `;
 
-export const TodoItemsTools = styled.div``;
+export const TodoItemsTools = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 22%;
+`;
 
 const deleteButton = css`
   color: ${(props) => props.active && "#e74c3c"};
   &:hover {
-    color: #e74c3c;
+    color: ${(props) => !props.disabled && "#e74c3c"};
   }
 `;
 
 const doneButton = css`
-  margin-right: 1rem;
   font-size: 3.2rem;
   color: ${(props) => props.active && "#27ae60"};
   :hover {
-    color: #27ae60;
+    color: ${(props) => !props.disabled && "#27ae60"};
   }
 `;
 
 const editButton = css`
-  margin-right: 1rem;
   :hover {
-    color: #3498db;
+    color: ${(props) => !props.disabled && "#3498db"};
   }
 `;
 const lockButton = css`
-  margin-right: 1rem;
+  color: ${(props) => props.parent && "#ce9b80"};
   :hover {
-    color: #ce9b80;
+    color: ${(props) => !props.disabled && "#ce9b80"};
   }
 `;
 
 const TodoItemButton = styled.button`
+opacity:${(props) => props.disabled && 0};
   font-size: 2.5rem;
   background: none;
   outline: none;
@@ -101,7 +107,7 @@ const TodoItemButton = styled.button`
   ${(props) => props.edit && editButton}
   ${(props) => props.lock && lockButton}
   &:hover {
-    transform: translateY(-0.1rem);
+    transform: ${(props) => !props.disabled && "translateY(-0.1rem)"};
   }
   &:active {
     transform: translateY(0.1rem);
