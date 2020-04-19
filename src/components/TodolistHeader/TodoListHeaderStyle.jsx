@@ -8,8 +8,12 @@ export const ArrowBack = styled(MdArrowBack)`
 `;
 export const ArrowsContainer = styled.div`
   display: flex;
-  width: 20%;
+  width: 10rem;
   justify-content: space-between;
+  align-items: center;
+  @media (max-width: 600px) {
+    margin-right: 1.8rem;
+  }
 `;
 const TodoListInfo = styled.div`
   display: flex;
@@ -20,7 +24,7 @@ const TodoListInfo = styled.div`
 `;
 const TodoListTitle = styled.h3`
   font-weight: 400;
-  color: #ccc;
+  color: #d0c190;
   margin-bottom: 1rem;
   font-size: 2.4rem;
   text-shadow: 0rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
@@ -46,6 +50,12 @@ const TodoListRemove = styled.button`
 
   &:active {
     transform: translateY(0.1rem);
+  }
+
+  @media (max-width: 750px) {
+    :first-child {
+      margin-right: 1rem;
+    }
   }
 `;
 

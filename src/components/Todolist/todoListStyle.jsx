@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
-export const TodolistText = styled.p`
-  color: #ccc;
-  padding: 1rem 0;
-  opacity: 0.2;
-  margin: 2rem 0;
-  text-align: center;
-  font-size: 2rem;
+const TodosContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, max-content));
+  grid-gap: 2rem;
+  align-items: center;
+
+  @media (max-width: 738px) {
+    grid-template-columns: repeat(auto-fit, minmax(25rem, max-content));
+  }
 `;
 
 const TodoListStyled = styled.div`
@@ -18,4 +20,13 @@ const TodoListStyled = styled.div`
   padding: 1rem;
 `;
 
-export { TodoListStyled };
+export const TodolistText = styled.p`
+  color: #ccc;
+  padding: 1rem 0;
+  opacity: 0.2;
+  margin: 2rem 0;
+  text-align: center;
+  font-size: 2rem;
+`;
+
+export { TodoListStyled, TodosContainer };

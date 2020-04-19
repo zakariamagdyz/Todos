@@ -22,19 +22,19 @@ const App = () => {
               <Route path="/" exact>
                 <div>asdsad</div>
               </Route>
-              <Route path="/yearly-todos">
-                <TodoPage title="Yearly todo" timeFrame="yearly" />
+              <Route path="/yearly-targets">
+                <TodoPage title="Yearly targets" timeFrame="yearly" />
               </Route>
 
-              <Route path="/monthly-todos">
-                <TodoPage title="Monthly todo" timeFrame="monthly" />
+              <Route path="/monthly-targets">
+                <TodoPage title="Monthly targets" timeFrame="monthly" />
               </Route>
 
-              <Route path="/weekly-todos">
-                <TodoPage title="Weekly todo" timeFrame="weekly" />
+              <Route path="/weekly-targets">
+                <TodoPage title="Weekly targets" timeFrame="weekly" />
               </Route>
-              <Route path="/daily-todos">
-                <TodoPage title="Daily todo" timeFrame="daily" />
+              <Route path="/daily-targets">
+                <TodoPage title="Daily todos" timeFrame="daily" />
               </Route>
               <Route path="/edit/:todoId">
                 <EditPage />

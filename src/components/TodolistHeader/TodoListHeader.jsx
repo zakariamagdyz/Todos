@@ -36,7 +36,7 @@ const TodoListHeader = ({
 
           {!editMode ? (
             <TodoListRemove
-              onClick={() => history.push(`/${time.timeUp}-todos`)}
+              onClick={() => history.push(`/${time.timeUp}-targets`)}
               disabled={!time.timeUp}
             >
               <ArrowBack />
@@ -46,7 +46,7 @@ const TodoListHeader = ({
 
           {!editMode ? (
             <TodoListRemove
-              onClick={() => history.push(`/${time.timeDown}-todos`)}
+              onClick={() => history.push(`/${time.timeDown}-targets`)}
               disabled={!time.timeDown}
             >
               Down

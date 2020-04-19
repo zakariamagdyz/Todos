@@ -1,11 +1,12 @@
 import React from "react";
-import { HomePageStyled, HomePageContainer } from "./TodoPage.style";
+import { HomePageStyled } from "./TodoPage.style";
 import TodoSearch from "../../components/TodoSearch/TodoSearch";
 import TodoList from "../../components/Todolist/TodoList";
 import AddTodo from "../../components/AddTodo/AddTodo";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectEditedTodo } from "../../Redux/todos/todosSelector";
+import Menu from "../../components/Menu-Item/Menu";
 
 ////////////////////////////////
 
@@ -53,7 +54,7 @@ const TodoPage = ({ title, timeFrame }) => {
   return (
     <div className="home-page">
       <HomePageStyled>
-        <HomePageContainer>
+        <div>
           <TodoSearch />
           <TodoList
             title={
@@ -63,7 +64,8 @@ const TodoPage = ({ title, timeFrame }) => {
             parentId={params.parentId}
           />
           <AddTodo timeFrame={RightTimeFrame} parentId={params.parentId} />
-        </HomePageContainer>
+        </div>
+        <Menu />
       </HomePageStyled>
     </div>
   );

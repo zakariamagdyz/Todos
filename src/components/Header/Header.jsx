@@ -29,10 +29,11 @@ const Header = () => {
             <HeaderSubtitle>A new step to organize your life</HeaderSubtitle>
           </div>
           <HeaderNav>
-            <Link to="/yearly-todos">Yearly </Link>
-            <Link to="/monthly-todos">Monthly </Link>
-            <Link to="/weekly-todos">Weekly </Link>
-            <Link to="/daily-todos">Daily </Link>
+            <Link to="/yearly-targets">Home </Link>
+            <Link to="/monthly-targets">Todos</Link>
+            <Link to="/weekly-targets">Sign in </Link>
+            <Link to="/daily-targets">Contact</Link>
+            <Link to="/daily-targets">About me</Link>
           </HeaderNav>
         </Container>
       </HeaderStyled>

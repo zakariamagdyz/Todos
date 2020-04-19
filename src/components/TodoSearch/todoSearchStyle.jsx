@@ -13,6 +13,7 @@ const defaultStyle = css`
 
 export const TodoSearchForm = styled.form`
   display: flex;
+  width: 50%;
 `;
 
 export const TodoSearchInput = styled.input.attrs((props) => ({

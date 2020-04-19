@@ -4,7 +4,17 @@ export const GlobalStyle = createGlobalStyle`
 html {
   font-size: 62.5%;
   /* direction:rtl; */
- 
+
+  @media (max-width:750px){
+
+    font-size:50%;
+    
+  } 
+  @media (max-width:550px){
+
+font-size:45%;
+
+} 
 }
 
 

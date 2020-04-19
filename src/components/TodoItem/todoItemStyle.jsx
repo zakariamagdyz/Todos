@@ -2,13 +2,13 @@ import styled, { css } from "styled-components/macro";
 
 const activeDisabled = css`
   opacity: 0.5;
-  > div:first-child::after {
+  > div:first-child p::after {
     content: "";
     background: #e74c3c;
     width: 115%;
     height: 0.3rem;
     position: absolute;
-    top: 24%;
+    top: 50%;
     left: -5px;
     box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
     border-radius: 3rem;
@@ -25,13 +25,12 @@ const activeDisabled = css`
     }
   }
 `;
-
 const TodoItemStyled = styled.div`
   color: #eee;
   background: ${(props) => props.edit && "#305477"};
   display: flex;
-  justify-content: space-between;
-  margin: 1rem 0;
+  flex-direction: column;
+
   border: 0.1rem solid #507192;
   padding: 1rem;
   box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.2);
@@ -41,29 +40,20 @@ const TodoItemStyled = styled.div`
 
 const TodoItemTexts = styled.div`
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-self: flex-start;
   p:first-child {
     text-transform: capitalize;
     font-size: 1.9rem;
     text-shadow: 0rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
-  }
-
-  p:last-child {
-    font-size: 0.9rem;
-    font-style: italic;
-    margin-top: 1rem;
-    opacity: 0.6;
-    color: #ccc;
-    text-shadow: 0rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
+    word-break: break-all;
   }
 `;
 
 export const TodoItemsTools = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 22%;
+  align-items: center;
+  margin-top: 0.3rem;
 `;
 
 const deleteButton = css`
@@ -74,7 +64,8 @@ const deleteButton = css`
 `;
 
 const doneButton = css`
-  font-size: 3.2rem;
+  font-size: 3rem;
+
   color: ${(props) => props.active && "#27ae60"};
   :hover {
     color: ${(props) => !props.disabled && "#27ae60"};
@@ -93,6 +84,13 @@ const lockButton = css`
   }
 `;
 
+export const ShowTime = styled.p`
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.6;
+  color: #ccc;
+  text-shadow: 0rem 1rem 0.5rem rgba(0, 0, 0, 0.2);
+`;
 const TodoItemButton = styled.button`
 opacity:${(props) => props.disabled && 0};
   font-size: 2.5rem;

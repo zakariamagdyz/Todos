@@ -13,7 +13,14 @@ const AddTodoStyled = styled.div`
 
 const AddTodoForm = styled.form`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 1rem;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+  }
 `;
 
 const AddTodoInput = styled.input`
@@ -22,27 +29,35 @@ const AddTodoInput = styled.input`
   color: #eee;
   font-family: inherit;
   font-size: 2rem;
-  border-bottom: 0.1rem solid lighten(#2c3e50, 20%);
+  border-bottom: 0.1rem solid #d0c190;
   outline: none;
+  width: 70%;
   ${common}
   &::placeholder {
     opacity: 0.4;
   }
+  @media (max-width: 400px) {
+    width: 100%;
+  }
 `;
 
 const AddTodoButton = styled.button`
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   outline: none;
   background: ${(props) => (props.edit ? "#77B39E" : "#ccc")};
-  margin-bottom: ${(props) => props.edit && "3rem"};
+  /* margin-bottom: ${(props) => props.edit && "3rem"}; */
   color: #2c3e50;
   font-size: 2rem;
   border: 0;
+  width: 25%;
   cursor: pointer;
   transition: transform 0.1s ease;
   ${common}
   &:active {
     transform: translateY(0.1rem);
+  }
+  @media (max-width: 400px) {
+  width:100%;
   }
 `;
 

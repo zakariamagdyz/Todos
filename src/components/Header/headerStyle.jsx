@@ -11,11 +11,15 @@ export const HeaderStyled = styled.div`
 `;
 
 export const Container = styled.div`
-  max-width: 114rem;
-  margin: 0 auto;
+  margin: 0 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 630px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const HeaderTitle = styled.h1`
@@ -39,11 +43,14 @@ export const HeaderSubtitle = styled.p`
 export const HeaderNav = styled.div`
   margin-left: auto;
   margin-right: 2rem;
+  @media (max-width: 630px) {
+    margin-top: 1.5rem;
+  }
 `;
 
 export const Link = styled(NavLink)`
   text-decoration: none;
-  color: #ccc;
+  color: #d0c190;
   font-size: 1.8rem;
   transition: color 0.2s ease;
   border-bottom: 1px solid transparent;
@@ -54,7 +61,7 @@ export const Link = styled(NavLink)`
   }
 
   :hover {
-    color: #ac7253;
-    border-bottom: 1px solid #eee;
+    color: #a99861;
+    border-bottom: 1px solid #6d5c25;
   }
 `;

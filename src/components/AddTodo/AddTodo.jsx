@@ -40,7 +40,7 @@ const AddTodo = ({ editMode, timeFrame, parentId }) => {
   const memoButton = useMemo(
     () => (
       <AddTodoButton edit={editMode ? true : false}>
-        {!editMode ? `Add ${timeFrame} todo` : "Save edit"}
+        {!editMode ? `Add todo` : "Save"}
       </AddTodoButton>
     ),
     [editMode, timeFrame]
@@ -97,7 +97,7 @@ const AddTodo = ({ editMode, timeFrame, parentId }) => {
         id: editMode.targetTodo.id,
         name: value.trim().toLowerCase(),
       });
-      history.push(`/${timeFrame}-todos`);
+      history.push(`/${timeFrame}-targets`);
     } else {
       dispatch(
         addNewTodo({ todo: value.trim().toLowerCase(), timeFrame, parentId })

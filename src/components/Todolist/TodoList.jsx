@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 
-import { TodolistText, TodoListStyled } from "./todoListStyle";
+import { TodolistText, TodoListStyled, TodosContainer } from "./todoListStyle";
 import TodoItem from "../TodoItem/TodoItem";
 import TodoListData from "../TodoListData/TodolistData";
 import { useDispatch, useSelector } from "react-redux";
@@ -46,20 +46,19 @@ const TodoList = ({ timeFrame, title, parentId, targetDetaildTodo }) => {
           todos={targetTodos}
           time={{ timeUp, timeDown }}
         />
-
-        {targetTodos.length ? (
-          <div className="todo-list__todos">
-            {targetTodos.map((curr) => (
+        <TodosContainer>
+          {targetTodos.length ? (
+            targetTodos.map((curr) => (
               <TodoItem
                 key={curr.id}
                 {...curr}
                 todoSearchData={todoSearchData}
               />
-            ))}
-          </div>
-        ) : (
-          <TodolistText>There is nothing to show </TodolistText>
-        )}
+            ))
+          ) : (
+            <TodolistText>There is nothing to show </TodolistText>
+          )}
+        </TodosContainer>
 
         {memoListFooter}
       </TodoListStyled>

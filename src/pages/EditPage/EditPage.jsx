@@ -59,7 +59,7 @@ const EditPage = () => {
             btnTitle="back"
             goHome
             btnFunc={() => {
-              history.push(`/${time}-todos`);
+              history.push(`/${time}-targets`);
               editModeConfig.setError(null);
             }}
           />
