@@ -29,8 +29,8 @@ const Header = () => {
             <HeaderSubtitle>A new step to organize your life</HeaderSubtitle>
           </div>
           <HeaderNav>
-            <Link to="/yearly-targets">Home </Link>
-            <Link to="/monthly-targets">Todos</Link>
+            <Link to="/">Home </Link>
+            <Link to="/daily-targets">Todos</Link>
             <Link to="/weekly-targets">Sign in </Link>
             <Link to="/daily-targets">Contact</Link>
             <Link to="/daily-targets">About me</Link>

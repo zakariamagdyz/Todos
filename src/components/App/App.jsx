@@ -6,6 +6,7 @@ import Spinner from "../Spinner/Spinner";
 import Errorboundary from "../Error-boundary/ErrorBoundry";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NotFoundPage from "../Not-found/NotFoundPage";
+import HomePage from "../../pages/Home-Page/Homepage";
 
 const TodoPage = lazy(() => import("../../pages/Todo-Page/TodoPage"));
 const EditPage = lazy(() => import("../../pages/EditPage/EditPage"));
@@ -20,7 +21,7 @@ const App = () => {
           <Suspense fallback={<Spinner />}>
             <Switch>
               <Route path="/" exact>
-                <div>asdsad</div>
+                <HomePage />
               </Route>
               <Route path="/yearly-targets">
                 <TodoPage title="Yearly targets" timeFrame="yearly" />
