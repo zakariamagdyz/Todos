@@ -1,4 +1,5 @@
 import { todosTypes } from "./todosTypes";
+import { userTypes } from "../user/user.type";
 import {
   changeTodoState,
   changeTodoName,
@@ -58,6 +59,12 @@ export const todosReducer = (state = INITAL_TODOS_DATA, action) => {
         ...state,
         allTodos: changeToUncomplete(state.allTodos, action.payload),
       };
+
+    case userTypes.LOG_OUT:
+      return { ...state, allTodos: [] };
+
+    case todosTypes.FETCH_TODOS:
+      return { ...state, allTodos: action.payload };
 
     default:
       return state;

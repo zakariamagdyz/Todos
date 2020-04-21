@@ -24,6 +24,7 @@ export const HomeTitles = styled.div`
 export const TargetContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, max-content));
-  margin: 10rem 15rem 8rem;
+  margin: 10rem auto;
+  justify-content: center;
   grid-gap: 2rem;
 `;

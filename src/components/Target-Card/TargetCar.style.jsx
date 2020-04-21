@@ -20,10 +20,11 @@ export const Title = styled.h2`
 `;
 
 export const Icon = styled(FaBriefcase)`
-  width: ${(props) => props.size === "master" && "55%"};
-  width: ${(props) => props.size === "professional" && "40%"};
-  width: ${(props) => props.size === "senior" && "30%"};
-  width: ${(props) => props.size === "junior" && "20%"};
+  font-size: ${(props) => props.data === "master" && "13rem"};
+  font-size: ${(props) => props.data === "professional" && "10rem"};
+  font-size: ${(props) => props.data === "senior" && "8rem"};
+  font-size: ${(props) => props.data === "junior" && "6rem"};
+
   color: #d0c190;
   margin: 2rem 0;
 `;

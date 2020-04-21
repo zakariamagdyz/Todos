@@ -18,10 +18,16 @@ import {
 
 import { useHistory } from "react-router-dom";
 
+import { selectUserData } from "../../Redux/user/user.selector";
+import { addData } from "../../Firebase/Firebase";
+import { selectAll } from "../../Redux/todos/todosSelector";
+
 ////////////////////////////////////////////////////////////////
 
 const AddTodo = ({ editMode, timeFrame, parentId }) => {
   // ErrorMsgs
+  const userData = useSelector(selectUserData);
+  const selectAllTodos = useSelector(selectAll);
 
   const errorMsgs = {
     above50: "Your todo charecters is more than 50 characters",
@@ -102,6 +108,9 @@ const AddTodo = ({ editMode, timeFrame, parentId }) => {
       dispatch(
         addNewTodo({ todo: value.trim().toLowerCase(), timeFrame, parentId })
       );
+      if (userData) {
+        addData(userData.id, selectAllTodos);
+      }
     }
     //DEFAULT STATE
     defaultState();

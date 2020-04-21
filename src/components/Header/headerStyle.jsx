@@ -55,6 +55,7 @@ export const Link = styled(NavLink)`
   transition: color 0.2s ease;
   border-bottom: 1px solid transparent;
   padding-bottom: 0.5rem;
+  cursor: pointer;
 
   &:not(:last-child) {
     margin-right: 2rem;

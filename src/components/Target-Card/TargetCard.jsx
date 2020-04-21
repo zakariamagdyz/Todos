@@ -18,10 +18,11 @@ const TargetCard = ({ title, size }) => {
         return;
     }
   };
+
   return (
     <TargetCardStyled>
       <Title>{title}</Title>
-      <Icon size={size} />
+      <Icon data={size} />
       <TargetButton onClick={() => history.push(`${getAdress(title)}`)}>
         Become A {title}
       </TargetButton>

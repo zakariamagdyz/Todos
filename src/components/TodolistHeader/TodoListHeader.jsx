@@ -14,7 +14,6 @@ import { useHistory } from "react-router-dom";
 
 const TodoListHeader = ({
   goHome,
-  btnTitle,
   title,
   btnFunc,
   todos = [],

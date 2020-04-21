@@ -47,3 +47,8 @@ export const changeTodoName = ({ id, name }) => ({
   type: todosTypes.EDIT_TODO,
   payload: { id, name },
 });
+
+export const fetchTodos = (todos) => ({
+  type: todosTypes.FETCH_TODOS,
+  payload: todos,
+});
