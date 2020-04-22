@@ -103,7 +103,7 @@ const TodoItem = (props) => {
               active={completed && true}
               onClick={() => {
                 dispatch(changeTodoState(id));
-                editMode && history.push(`/${timeFrame}-todos`);
+                editMode && history.push(`/${timeFrame}-targets`);
               }}
             >
               <MdDone />
@@ -121,7 +121,7 @@ const TodoItem = (props) => {
             active={completed && true}
             onClick={() => {
               dispatch(removeTodo(id));
-              editMode && history.push(`/${timeFrame}-todos`);
+              editMode && history.push(`/${timeFrame}-targets`);
             }}
           >
             <MdDelete />

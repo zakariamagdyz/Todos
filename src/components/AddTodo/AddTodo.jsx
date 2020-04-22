@@ -46,7 +46,11 @@ const AddTodo = ({ editMode, timeFrame, parentId }) => {
   const memoButton = useMemo(
     () => (
       <AddTodoButton edit={editMode ? true : false}>
-        {!editMode ? `Add todo` : "Save"}
+        {!editMode
+          ? timeFrame !== "daily"
+            ? "Add Target"
+            : "Add Todo"
+          : "Save"}
       </AddTodoButton>
     ),
     [editMode, timeFrame]

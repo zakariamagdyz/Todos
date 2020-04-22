@@ -6,7 +6,7 @@ const TargetCard = ({ title, size }) => {
   const history = useHistory();
   const getAdress = (adress) => {
     switch (adress) {
-      case "cheif":
+      case "chief":
         return "/yearly-targets";
       case "master":
         return "/monthly-targets";
