@@ -20,8 +20,8 @@ export const Title = styled.h2`
 `;
 
 export const Icon = styled(FaBriefcase)`
-  font-size: ${(props) => props.data === "master" && "13rem"};
-  font-size: ${(props) => props.data === "professional" && "10rem"};
+  font-size: ${(props) => props.data === "chief" && "13rem"};
+  font-size: ${(props) => props.data === "master" && "10rem"};
   font-size: ${(props) => props.data === "senior" && "8rem"};
   font-size: ${(props) => props.data === "junior" && "6rem"};
 

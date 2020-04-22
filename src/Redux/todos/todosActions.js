@@ -1,7 +1,7 @@
 import { todosTypes } from "./todosTypes";
 import { v4 } from "uuid";
 
-export const addNewTodo = ({ todo, timeFrame, parentId }) => ({
+export const addNewTodo = ({ todo, timeFrame = null, parentId = null }) => ({
   type: todosTypes.ADD_NEW_TODO,
   payload: {
     id: v4(),

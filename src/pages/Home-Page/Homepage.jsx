@@ -2,7 +2,7 @@ import React from "react";
 import { HomePageStyled, HomeTitles, TargetContainer } from "./HomePage.style";
 import TargetCard from "../../components/Target-Card/TargetCard";
 const HomePage = () => {
-  const Targets = ["master", "professional", "senior", "junior"];
+  const Targets = ["chief", "master", "senior", "junior"];
   return (
     <HomePageStyled>
       <HomeTitles>

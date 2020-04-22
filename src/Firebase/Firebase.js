@@ -51,8 +51,7 @@ export const createUserProfile = async (userAuth, addionalData) => {
 //   email: "zakariamagdy@ymail.com",
 // });
 
-export const addData = async (id, Todo) => {
+export const addData = async (id, Todos) => {
   const userRef = await fireStore.doc(`/users/${id}`);
-
-  userRef.update("todos", Todo);
+  userRef.update("todos", Todos);
 };

@@ -108,9 +108,6 @@ const AddTodo = ({ editMode, timeFrame, parentId }) => {
       dispatch(
         addNewTodo({ todo: value.trim().toLowerCase(), timeFrame, parentId })
       );
-      if (userData) {
-        addData(userData.id, selectAllTodos);
-      }
     }
     //DEFAULT STATE
     defaultState();
