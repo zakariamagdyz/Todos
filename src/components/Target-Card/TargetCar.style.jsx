@@ -1,6 +1,21 @@
 import styled from "styled-components";
 import { FaBriefcase } from "react-icons/fa";
 
+const selectFont = (data) => {
+  switch (data) {
+    case "chief":
+      return "13rem";
+    case "master":
+      return "10rem";
+    case "senior":
+      return "8rem";
+    case "junior":
+      return "6rem";
+    default:
+      return "1rem";
+  }
+};
+
 export const TargetCardStyled = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,10 +35,10 @@ export const Title = styled.h2`
 `;
 
 export const Icon = styled(FaBriefcase)`
-  font-size: ${(props) => props.data === "chief" && "13rem"};
-  font-size: ${(props) => props.data === "master" && "10rem"};
+  font-size: ${(props) => selectFont(props.data)};
+  /* font-size: ${(props) => props.data === "master" && "10rem"};
   font-size: ${(props) => props.data === "senior" && "8rem"};
-  font-size: ${(props) => props.data === "junior" && "6rem"};
+  font-size: ${(props) => props.data === "junior" && "6rem"}; */
 
   color: #d0c190;
   margin: 2rem 0;
